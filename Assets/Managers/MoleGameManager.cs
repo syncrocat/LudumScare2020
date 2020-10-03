@@ -1,25 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class MoleGameManager : MiniGameManager
 {
+    private const int MIN_PREVIEW_MOLES = 1;
+    private const int MAX_PREVIEW_MOLES = 9;
+    private const int HEALTH_REWARD = 50;
+
     [SerializeField] private List<GameObject> m_moleObjects;
 
     private List<Mole> m_moles;
 
+    private int m_currentMole;
+
+    private int m_molesToPreview;
+
+    private List<int> m_moleOrder;
+
     public override void StartGame(int side, float difficulty)
     {
         base.StartGame(side, difficulty);
+        m_molesToPreview = Math.Max(MAX_PREVIEW_MOLES - (int)(difficulty * 10), MIN_PREVIEW_MOLES);
+        m_moles = m_moleObjects.Select(obj =>
+        {
+
+            var mole = obj.GetComponent<Mole>();
+            return mole;
+        }).ToList();
         m_moles = new List<Mole>();
         foreach(var moleObject in m_moleObjects) {
             m_moles.Add(moleObject.GetComponent<Mole>());
         }
-        
-        foreach (var mole in m_moles)
+
+        m_moleOrder = RandomOrder(m_moles.Count);
+
+        for (var i = 0; i < m_molesToPreview; i++)
         {
-            mole.SetSpritePopped();
+            m_moles[m_moleOrder[i]].SetSpritePopped();
+            m_moles[m_moleOrder[i]].Index = i;
         }
+
+        for (var i = m_molesToPreview; i < m_moles.Count; i++)
+        {
+            m_moles[m_moleOrder[i]].SetSpriteBuried();
+            m_moles[m_moleOrder[i]].Index = i;
+        }
+
     }
 
     protected void Update()
@@ -28,35 +56,33 @@ public class MoleGameManager : MiniGameManager
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
-           // Debug.Log("Clicked!");
+        /*if (Input.GetMouseButtonDown(0)) {
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
-            var moleHit = hit.collider?.gameObject?.GetComponent<Mole>();
+            if (!(hit && hit.collider != null && hit.collider.gameObject != null))
+            {
+                return;
+            }
+
+            var moleHit = hit.collider.gameObject.GetComponent<Mole>();
             if (moleHit == null) {
                 return;
             }
 
-            //Debug.Log("Clicked... A MOLE!");
             TapMole(moleHit);
-        }
+        }*/
 
         // Check for touches on any moles
         foreach(Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
             {
-               // Debug.Log("Touched!");
-                Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-                Vector2 touchPos2D = new Vector2(touchPos.x, touchPos.y);
-
-                RaycastHit2D hit = Physics2D.Raycast(touchPos2D, Vector2.zero);
-        
-                var moleHit = hit.collider?.gameObject?.GetComponent<Mole>();
-                if (moleHit == null) {
+                RaycastHit2D hit = Physics2D.Raycast(touch.position, Vector2.zero);
+                var moleHit = hit.collider.gameObject.GetComponent<Mole>();
+                if (moleHit == null)
+                {
                     continue;
                 }
 
-               // Debug.Log("Touched... a MOLE!");
                 TapMole(moleHit);
             }
         }
@@ -64,21 +90,39 @@ public class MoleGameManager : MiniGameManager
 
     private void TapMole(Mole tappedMole)
     {
-        foreach(var mole in m_moles) {
-            Debug.Log(mole.Popped);
-        }
-
-        tappedMole.Tapped();
-
-        // Check to see if all moles are done
-        foreach(Mole mole in m_moles)
+        if (tappedMole.Tapped(m_currentMole))
         {
-            if (mole.Popped)
+            // Show the next moles we need to
+            m_currentMole += 1;
+            if (m_currentMole >= m_moles.Count)
             {
-                return;
+                DoneGame?.Invoke(m_side, HEALTH_REWARD);
+            }
+            else if (m_currentMole + m_molesToPreview - 1 < m_moles.Count)
+            {
+                m_moles[m_moleOrder[m_currentMole + m_molesToPreview - 1]].SetSpritePopped();
             }
         }
+    }
 
-        DoneGame?.Invoke(m_side, 50);
+    private List<int> RandomOrder(int size)
+    {
+        var rnd = new System.Random();
+        var choices = new List<int>();
+        for (var i = 0; i < size; i++)
+        {
+            choices.Add(i);
+        }
+
+        var result = new List<int>();
+        while (size > 0)
+        {
+            var choice = rnd.Next(0, size);
+            result.Add(choices[choice]);
+            choices.RemoveAt(choice);
+            size -= 1;
+        }
+
+        return result;
     }
 }
