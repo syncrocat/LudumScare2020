@@ -8,7 +8,7 @@ public class BasketballManager : MiniGameManager
     private readonly float SWIPE_RADIUS = 200;
     private readonly float MINIMUM_SWIPE_MAGNITUDE = 50;
     private readonly float MAXIMUM_SWIPE_DURATION = 0.5f;
-    private readonly float FAILED_SWIPE_HEIGHT = 300;
+    private readonly float FAILED_SWIPE_HEIGHT = 500;
     //private readonly float SUCCESS_SWIPE_HEIGHT_MODIFIER = 50; // Successful swipe will be the basketball net height plus this value
     private float SUCCESS_SWIPE_HEIGHT = 1000; // Because I didn't want to do math, this variable must be carefully balanced with GRAVITY_PER_SECOND in BallScript
 

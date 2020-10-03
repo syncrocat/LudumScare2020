@@ -16,12 +16,18 @@ public class BallScript : MonoBehaviour
 
     bool scoredGoal = false;
 
+    private float scaleY;
+
     public UnityAction<bool> BallDead;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = this.GetComponent<Rigidbody2D>();
+
+        GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
+        scaleY = canv.GetComponent<RectTransform>().localScale.y;
+
     }
 
     public void ShootMe(float shootHeight, Vector2 shootVector)
@@ -33,8 +39,11 @@ public class BallScript : MonoBehaviour
         // vSpeed = newVector.y;
         //hSpeed = newVector.x;
 
-        rigidBody.AddForce(newVector * 70);
-        rigidBody.gravityScale = 300;
+        //rigidBody.AddForce(newVector * 70);
+
+
+        rigidBody.velocity += newVector * (1.65f / 2.4f * scaleY);
+        rigidBody.gravityScale = 300 / 2.4f * scaleY;
         timer = 0;
 
     }
