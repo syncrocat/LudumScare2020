@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class MiniGameTest : MiniGameManager
 {
     float m_timer = 0;
+    private bool m_paused;
 
     public override void DestroySelf()
     {
@@ -23,15 +24,26 @@ public class MiniGameTest : MiniGameManager
         base.StartGame(difficulty);
     }
 
-    private void FixedUpdate()
+    public override void Pause()
     {
-        m_timer += 1 * Time.deltaTime;
-
-        if (m_timer > 10)
-        {
-            DoneGame.Invoke(50);
-        }
+        m_paused = true;
     }
 
-    
+    public override void Unpause()
+    {
+        m_paused = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (m_paused)
+        {
+            m_timer += 1 * Time.deltaTime;
+
+            if (m_timer > 10)
+            {
+                DoneGame.Invoke(50);
+            }
+        }
+    }
 }
