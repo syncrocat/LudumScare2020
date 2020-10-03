@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BasketballNet
   - BasketballNetRim
+  - MainCanvas
   layers:
   - Default
   - TransparentFX
