@@ -63,9 +63,14 @@ public class GamerManager : MonoBehaviour
 
     private bool m_paused = false;
 
+    public GameObject GameCanvas;
+    public GameObject PauseCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
+        PauseCanvas.SetActive(false);
+        GameCanvas.SetActive(true);
         m_healthManager = GetComponent<HealthManager>();
 
         //StartMiniGame(0);
@@ -122,6 +127,9 @@ public class GamerManager : MonoBehaviour
         {
             gameManager.Pause();
         }
+
+        PauseCanvas.SetActive(true);
+        GameCanvas.SetActive(false);
     }
 
     public void Unpause() {
@@ -131,6 +139,9 @@ public class GamerManager : MonoBehaviour
         {
             gameManager.Unpause();
         }
+
+        PauseCanvas.SetActive(false);
+        GameCanvas.SetActive(true);
     }
 
     private int PickNewGameIndex(int side)
