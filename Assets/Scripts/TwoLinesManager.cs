@@ -35,18 +35,18 @@ public class TwoLinesManager : MiniGameManager
     private void CreateStraightLines()
     {
         // A length of 1 translates to "100% of the game space"
-        var start1 = new Vector2(-1, -1);
-        var end1 = new Vector2(1, 1);
+       // var start1 = Camera.main.ScreenToWorldPoint(new Vector2(-1, -1));
+       //var end1 = Camera.main.ScreenToWorldPoint(new Vector2(1, 1));
 
         GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
         var scale = canv.GetComponent<RectTransform>().localScale;
 
         var gameOrigin = Camera.main.ScreenToWorldPoint(m_gameArea.GetComponent<RectTransform>().position);
 
-        var realStart1 = (Vector2)gameOrigin + new Vector2(start1.x, start1.y);
-        var realEnd1 = (Vector2)gameOrigin + new Vector2(end1.x, end1.y);
+        var realStart1 = (Vector2)gameOrigin + new Vector2(-10 / scale.x, -10 / scale.y);
+        var realEnd1 = (Vector2)gameOrigin + new Vector2(10 / scale.x, 10 / scale.y);
 
-        Debug.Log($"{scale} {realStart1} {realEnd1}");
+       // Debug.Log($"{scale} {realStart1} {realEnd1}");
 
 
 
