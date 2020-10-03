@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4704832909956735536}
   - component: {fileID: 8980028644379205655}
   - component: {fileID: 6572505648806021668}
+  - component: {fileID: 3426752846372457985}
   m_Layer: 5
   m_Name: Mole6
   m_TagString: Untagged
@@ -89,6 +90,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &3426752846372457985
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51433165934993842}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &2394342736357912332
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +118,7 @@ GameObject:
   - component: {fileID: 8923879694480548660}
   - component: {fileID: 8518412644857599031}
   - component: {fileID: 4990981245599022378}
+  - component: {fileID: 2840957031294410226}
   m_Layer: 5
   m_Name: Mole1
   m_TagString: Untagged
@@ -178,6 +196,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &2840957031294410226
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394342736357912332}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &2684612013107411318
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +224,7 @@ GameObject:
   - component: {fileID: 4975215903603006879}
   - component: {fileID: 347066207063208698}
   - component: {fileID: 8664325104158337595}
+  - component: {fileID: 6091281041664923796}
   m_Layer: 5
   m_Name: Mole8
   m_TagString: Untagged
@@ -267,6 +302,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &6091281041664923796
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2684612013107411318}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &2745500735430325179
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +397,7 @@ GameObject:
   - component: {fileID: 1998458628911688154}
   - component: {fileID: 4937761071409806087}
   - component: {fileID: 3693411118819494099}
+  - component: {fileID: 64046392372060814}
   m_Layer: 5
   m_Name: Mole4
   m_TagString: Untagged
@@ -423,6 +475,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &64046392372060814
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692667506428044278}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &4414779197897751387
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +503,7 @@ GameObject:
   - component: {fileID: 8716735601118928127}
   - component: {fileID: 6942570289029628352}
   - component: {fileID: 4110783643549764107}
+  - component: {fileID: 2997246429612804899}
   m_Layer: 5
   m_Name: Mole9
   m_TagString: Untagged
@@ -512,6 +581,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &2997246429612804899
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414779197897751387}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &5740630838255911068
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +609,7 @@ GameObject:
   - component: {fileID: 6200893517738042609}
   - component: {fileID: 7950112381981603796}
   - component: {fileID: 4411516667386317747}
+  - component: {fileID: 1854635486356292230}
   m_Layer: 5
   m_Name: Mole5
   m_TagString: Untagged
@@ -601,6 +687,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &1854635486356292230
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740630838255911068}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &6541329934934467513
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +715,7 @@ GameObject:
   - component: {fileID: 6213024933861408791}
   - component: {fileID: 2875577698065646238}
   - component: {fileID: 5715335048579082231}
+  - component: {fileID: 5567828826374306578}
   m_Layer: 5
   m_Name: Mole2
   m_TagString: Untagged
@@ -690,6 +793,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &5567828826374306578
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541329934934467513}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &7810602657925843771
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +821,7 @@ GameObject:
   - component: {fileID: 8210075029099293483}
   - component: {fileID: 9167944257073240615}
   - component: {fileID: 3040667610836558986}
+  - component: {fileID: 9188493096699939715}
   m_Layer: 5
   m_Name: Mole7
   m_TagString: Untagged
@@ -779,6 +899,22 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &9188493096699939715
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810602657925843771}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &8395136000352476947
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +927,7 @@ GameObject:
   - component: {fileID: 6289728680184755668}
   - component: {fileID: 1112810073972686546}
   - component: {fileID: 5916441120278328664}
+  - component: {fileID: 5259984690921137596}
   m_Layer: 5
   m_Name: Mole3
   m_TagString: Untagged
@@ -868,3 +1005,19 @@ MonoBehaviour:
   Popped: 0
   PoppedSprite: {fileID: 21300000, guid: b1a0a62d1dfa0ef47873877b2040a847, type: 3}
   BuriedSprite: {fileID: 21300000, guid: 2df37e08cf7c2fa4f8a7e7d4c4f1eeb8, type: 3}
+--- !u!58 &5259984690921137596
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395136000352476947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
