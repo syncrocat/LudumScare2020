@@ -29,14 +29,14 @@ public class MoleGameManager : MiniGameManager
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Clicked!");
+           // Debug.Log("Clicked!");
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
             var moleHit = hit.collider?.gameObject?.GetComponent<Mole>();
             if (moleHit == null) {
                 return;
             }
 
-            Debug.Log("Clicked... A MOLE!");
+            //Debug.Log("Clicked... A MOLE!");
             TapMole(moleHit);
         }
 
@@ -45,7 +45,7 @@ public class MoleGameManager : MiniGameManager
         {
             if (touch.phase == TouchPhase.Began)
             {
-                Debug.Log("Touched!");
+               // Debug.Log("Touched!");
                 Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 Vector2 touchPos2D = new Vector2(touchPos.x, touchPos.y);
 
@@ -56,7 +56,7 @@ public class MoleGameManager : MiniGameManager
                     continue;
                 }
 
-                Debug.Log("Touched... a MOLE!");
+               // Debug.Log("Touched... a MOLE!");
                 TapMole(moleHit);
             }
         }
