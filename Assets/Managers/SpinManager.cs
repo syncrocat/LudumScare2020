@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Boo.Lang;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 enum Direction
@@ -7,13 +9,20 @@ enum Direction
     CounterClockwise
 }
 
+public enum SpinState
+{
+    ReallyFine,
+    Fine,
+    Bad,
+    ReallyBad,
+}
+
 [RequireComponent(typeof (RectTransform))]
 public class SpinManager : MiniGameManager
 {
-
     //Constants
     private readonly float INNER_SPIN_RADIUS = 100;
-    private readonly float OUTER_SPIN_RADIUS = 300;
+    private readonly float OUTER_SPIN_RADIUS = 350;
     private readonly Direction DEFAULT_SPIN_DIRECTION = Direction.CounterClockwise;
 
     // Vars
@@ -22,7 +31,11 @@ public class SpinManager : MiniGameManager
     private Vector2 spinner_center;
     private float turnSinceLast = 0;
     public float speed;
+    private List<float> speedRollingAverage = new List<float>() { 0, 0, 0, 0, 0 };
+    private int rollingAverageIndex = 0;
+    public VelocityBarManager VelocityManager;
 
+    public Text DebugText;
 
     [SerializeField] private GameObject spinnerImg = null;
 
@@ -68,6 +81,38 @@ public class SpinManager : MiniGameManager
         }
 
         speed = (turnSinceLast / Time.deltaTime);
+        if (speed < 0)
+        {
+            speed = 0;
+        }
+
+        speedRollingAverage[rollingAverageIndex] = speed;
+        rollingAverageIndex += 1;
+        if (rollingAverageIndex > 4)
+        {
+            rollingAverageIndex = 0;
+        }
+
+        var rollingAverage = speedRollingAverage.Average();
+
+        Debug($"Speed: {rollingAverage}");
+        // Calculate state to send to velocitymanager
+        SpinState spinState;
+        if (speed > 500)
+        {
+            spinState = SpinState.ReallyFine;
+        } else if (speed > 300)
+        {
+            spinState = SpinState.Fine;
+        } else if (speed > 150)
+        {
+            spinState = SpinState.Bad;
+        } else
+        {
+            spinState = SpinState.ReallyBad;
+        }
+
+        VelocityManager.SetSpinState(spinState);
 
         turnSinceLast = 0;
     }
@@ -113,5 +158,20 @@ public class SpinManager : MiniGameManager
             }
         }
         return 0;
+    }
+
+    public HealthState GetHealthState()
+    {
+        return VelocityManager.GetHealthState();
+    }
+
+    private void Debug(string text)
+    {
+        if (DebugText == null)
+        {
+            return;
+        }
+
+        DebugText.text = text;
     }
 }

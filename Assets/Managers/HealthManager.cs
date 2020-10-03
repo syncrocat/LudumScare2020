@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
     // Constants 
     readonly float MAX_HEALTH = 100;
-    readonly float STANDARD_DRAIN_RATE = 5;  //in units per second
-    readonly float FEVER_DRAIN_RATE = 10;  //in units per second
+    readonly float FINE_DRAIN_RATE = 5;
+    readonly float NOT_FINE_DRAIN_RATE = 10;
+    readonly float EMPTY_DRAIN_RATE = 20;
+
+    public Text DebugText;
 
     // Variables
     [SerializeField] private float m_health; //Only serialized for editor viewing purposes
@@ -20,7 +24,7 @@ public class HealthManager : MonoBehaviour
     {
         m_paused = false;
         m_health = MAX_HEALTH;
-        m_drainRate = STANDARD_DRAIN_RATE;
+        m_drainRate = FINE_DRAIN_RATE;
     }
 
     void FixedUpdate()
@@ -35,6 +39,8 @@ public class HealthManager : MonoBehaviour
         m_health -= m_drainRate * tt;
         if (m_health < 0)
             Die();
+
+        Debug($"HP: {GetHP()}");
     }
 
     public void AddHP(float x)
@@ -64,8 +70,34 @@ public class HealthManager : MonoBehaviour
         m_paused = false;
     }
 
+    public void SetHealthState(HealthState healthState)
+    {
+        switch (healthState)
+        {
+            case HealthState.Fine:
+                m_drainRate = FINE_DRAIN_RATE;
+                break;
+            case HealthState.NotFine:
+                m_drainRate = NOT_FINE_DRAIN_RATE;
+                break;
+            case HealthState.Empty:
+                m_drainRate = EMPTY_DRAIN_RATE;
+                break;
+        }
+    }
+
     private void Die()
     {
         // todo Death goes here
+    }
+
+    private void Debug(string text)
+    {
+        if (DebugText == null)
+        {
+            return;
+        }
+
+        DebugText.text = text;
     }
 }

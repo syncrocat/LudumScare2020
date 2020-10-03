@@ -89,6 +89,7 @@ public class GamerManager : MonoBehaviour
         {
             m_currentGame[side] = Instantiate(gameOverride, new Vector2(0, 0), Quaternion.identity, m_gameArea[side].transform);
         }
+
         m_currentGame[side].transform.localPosition = new Vector2(0, 0);
         m_currentGameManager[side] = m_currentGame[side].GetComponent<MiniGameManager>();
         m_currentGameManager[side].DoneGame += FinishMiniGame;
@@ -164,6 +165,43 @@ public class GamerManager : MonoBehaviour
         if (m_paused)
             return;
 
-        m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime; 
+        m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
+        var states = new List<HealthState>();
+        // Check any spinners for health updates
+        foreach(var game in m_currentGame)
+        {
+            var spinManager = game.GetComponent<SpinManager>();
+            if (spinManager == null)
+            {
+                continue;
+            }
+
+            states.Add(spinManager.GetHealthState());
+        }
+
+        // Assuming we want the worst performance of all current spinners to be what affects our hp
+        var worstState = HealthState.Fine;
+        foreach(var state in states)
+        {
+            switch(worstState)
+            {
+                case HealthState.Fine:
+                    if (state == HealthState.NotFine || state == HealthState.Empty)
+                    {
+                        worstState = state;
+                    }
+                    break;
+                case HealthState.NotFine:
+                    if (state == HealthState.Empty)
+                    {
+                        worstState = state;
+                    }
+                    break;
+                case HealthState.Empty:
+                    break;
+            }
+        }
+
+        m_healthManager.SetHealthState(worstState);
     }
 }

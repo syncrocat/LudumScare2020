@@ -56,17 +56,20 @@ public class MoleGameManager : MiniGameManager
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Clicked!");
+        /*if (Input.GetMouseButtonDown(0)) {
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
+            if (!(hit && hit.collider != null && hit.collider.gameObject != null))
+            {
+                return;
+            }
+
             var moleHit = hit.collider.gameObject.GetComponent<Mole>();
             if (moleHit == null) {
                 return;
             }
 
-            Debug.Log("Clicked... A MOLE!");
             TapMole(moleHit);
-        }
+        }*/
 
         // Check for touches on any moles
         foreach(Touch touch in Input.touches)
