@@ -6,9 +6,6 @@ using UnityEngine.Events;
 // Example implementation of a MiniGameManager
 public class MiniGameTest : MiniGameManager
 {
-    float m_timer = 0;
-    private bool m_paused;
-
     public override void DestroySelf()
     {
         // Any additional cleanup behaviour first
@@ -17,33 +14,20 @@ public class MiniGameTest : MiniGameManager
         // Call basic shared destroy self 
         base.DestroySelf();
     }
-    public override void StartGame(float difficulty)
+    public override void StartGame(int side, float difficulty)
     {
+        base.StartGame(side, difficulty);
+
         Debug.Log("Starting minigame!");
-
-        base.StartGame(difficulty);
     }
 
-    public override void Pause()
+    protected override void FixedUpdate()
     {
-        m_paused = true;
-    }
+        base.FixedUpdate();
 
-    public override void Unpause()
-    {
-        m_paused = false;
-    }
-
-    private void FixedUpdate()
-    {
-        if (m_paused)
+        if (m_timer > 10)
         {
-            m_timer += 1 * Time.deltaTime;
-
-            if (m_timer > 10)
-            {
-                DoneGame.Invoke(50);
-            }
+            DoneGame.Invoke(m_side, 50);
         }
     }
 }
