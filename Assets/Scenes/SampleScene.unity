@@ -464,21 +464,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
-      propertyPath: m_gameArea.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
-        type: 3}
-      propertyPath: m_games.Array.data[0]
+      propertyPath: m_gameArea.Array.data[0]
       value: 
-      objectReference: {fileID: 3272084298122434780, guid: de80a7c3d893f5041b100f7f7e7acf7a,
-        type: 3}
-    - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
-        type: 3}
-      propertyPath: m_games.Array.data[1]
-      value: 
-      objectReference: {fileID: 2745500735430325179, guid: 381d36584d4686c49a14eece5b6325f2,
-        type: 3}
+      objectReference: {fileID: 2088808208}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_gameArea.Array.data[1]
@@ -486,9 +474,15 @@ PrefabInstance:
       objectReference: {fileID: 1808920734}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
-      propertyPath: m_gameArea.Array.data[0]
+      propertyPath: m_games.Array.data[0]
       value: 
-      objectReference: {fileID: 2088808208}
+      objectReference: {fileID: 7262284576502769666, guid: 7b0c304a555b58341a5c320e638ef893,
+        type: 3}
+    - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
+        type: 3}
+      propertyPath: m_games.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9118873634382429008, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_LocalPosition.x

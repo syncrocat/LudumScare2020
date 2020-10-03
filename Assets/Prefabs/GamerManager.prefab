@@ -61,9 +61,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_games:
   - {fileID: 3272084298122434780, guid: de80a7c3d893f5041b100f7f7e7acf7a, type: 3}
+  - {fileID: 2745500735430325179, guid: 381d36584d4686c49a14eece5b6325f2, type: 3}
+  - {fileID: 7262284576502769666, guid: 7b0c304a555b58341a5c320e638ef893, type: 3}
   m_spinnerPrefab: {fileID: 2871890761606421756, guid: 51aabb98d2b74f846a6178b1ccc22852,
     type: 3}
-  m_gameArea: []
+  m_gameArea:
+  - {fileID: 0}
+  - {fileID: 0}
   m_difficultyModifier: 0
 --- !u!1 &1724622242107480156
 GameObject:
