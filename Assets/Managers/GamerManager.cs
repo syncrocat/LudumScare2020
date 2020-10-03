@@ -95,6 +95,7 @@ public class GamerManager : MonoBehaviour
         m_currentGameManager[side].DestroySelf();
 
         // Start new
+        // Spinner flow goes here
         StartMiniGame(side);
     }
 
