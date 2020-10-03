@@ -8,6 +8,7 @@ public class Mole : MonoBehaviour
     public bool Popped;
     public Sprite PoppedSprite;
     public Sprite BuriedSprite;
+    public int Index;
 
     private Image m_image;
     
@@ -43,11 +44,14 @@ public class Mole : MonoBehaviour
         Popped = false;
     }
 
-    public void Tapped()
+    public bool Tapped(int desiredMole)
     {
-        if (Popped)
+        if (Popped) // && Index == desiredMole
         {
             SetSpriteBuried();
+            return true;
         }
+
+        return false;
     }
 }
