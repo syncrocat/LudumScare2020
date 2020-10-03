@@ -29,7 +29,7 @@ public class HealthManager : MonoBehaviour
         {
             return;
         }
-        
+
         float tt = Time.deltaTime;
 
         m_health -= m_drainRate * tt;
@@ -54,6 +54,14 @@ public class HealthManager : MonoBehaviour
     public float GetHP()
     {
         return m_health;
+    }
+
+    public void Pause() {
+        m_paused = true;
+    }
+
+    public void Unpause() {
+        m_paused = false;
     }
 
     private void Die()

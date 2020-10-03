@@ -87,9 +87,9 @@ public class GamerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!m_paused)
-        {
-            m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime; 
-        }
+        if (m_paused)
+            return;
+
+        m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime; 
     }
 }
