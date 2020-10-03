@@ -59,3 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_games:
   - {fileID: 3272084298122434780, guid: de80a7c3d893f5041b100f7f7e7acf7a, type: 3}
+  m_spinnerPrefab: {fileID: 2871890761606421756, guid: 51aabb98d2b74f846a6178b1ccc22852,
+    type: 3}
+  m_gameArea: []
+  m_difficultyModifier: 0

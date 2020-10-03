@@ -45,6 +45,7 @@ public class GamerManager : MonoBehaviour
 
     // Variables
     [SerializeField] private List<GameObject> m_games;
+    [SerializeField] private GameObject m_spinnerPrefab;
     private HealthManager m_healthManager;
 
     // 0 is left, 1 is right
@@ -64,13 +65,14 @@ public class GamerManager : MonoBehaviour
     void Start()
     {
         m_healthManager = GetComponent<HealthManager>();
-        
-        StartMiniGame(0);
+
+        //StartMiniGame(0);
+        StartSpinner(0);
         StartMiniGame(1);
     }
 
     // Left side is 0, right side is 1
-    void StartMiniGame(int side)
+    void StartMiniGame(int side, GameObject gameOverride = null)
     {
         if (side < 0 || side > 1)
         {
@@ -78,13 +80,24 @@ public class GamerManager : MonoBehaviour
             return;
         }
 
-        var gameIndex = PickNewGameIndex(side);
-        m_currentGameIndex[side] = gameIndex;
-        m_currentGame[side] = Instantiate(m_games[gameIndex], new Vector2(0, 0), Quaternion.identity, m_gameArea[side].transform);
+        if (gameOverride == null)
+        {
+            var gameIndex = PickNewGameIndex(side);
+            m_currentGameIndex[side] = gameIndex;
+            m_currentGame[side] = Instantiate(m_games[gameIndex], new Vector2(0, 0), Quaternion.identity, m_gameArea[side].transform);
+        } else
+        {
+            m_currentGame[side] = Instantiate(gameOverride, new Vector2(0, 0), Quaternion.identity, m_gameArea[side].transform);
+        }
         m_currentGame[side].transform.localPosition = new Vector2(0, 0);
         m_currentGameManager[side] = m_currentGame[side].GetComponent<MiniGameManager>();
         m_currentGameManager[side].DoneGame += FinishMiniGame;
         m_currentGameManager[side].StartGame(side, m_difficultyModifier);
+    }
+
+    void StartSpinner(int side)
+    {
+        StartMiniGame(side, m_spinnerPrefab);
     }
 
     void FinishMiniGame(int side, int reward)

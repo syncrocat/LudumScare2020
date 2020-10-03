@@ -8,7 +8,7 @@ enum Direction
 }
 
 [RequireComponent(typeof (RectTransform))]
-public class SpinManager : MonoBehaviour
+public class SpinManager : MiniGameManager
 {
 
     //Constants
@@ -25,7 +25,6 @@ public class SpinManager : MonoBehaviour
 
 
     [SerializeField] private GameObject spinnerImg = null;
-    [SerializeField] private HealthManager m_healthManager = null;
 
     // Start is called before the first frame update
     void Start()
@@ -59,8 +58,10 @@ public class SpinManager : MonoBehaviour
         turnSinceLast += turnAngle;   
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if ((turnSinceLast > 0 && mode == Direction.CounterClockwise) || (turnSinceLast < 0 && mode == Direction.Clockwise))
         {
             spinnerImg.transform.Rotate(new Vector3(0, 0, turnSinceLast));
