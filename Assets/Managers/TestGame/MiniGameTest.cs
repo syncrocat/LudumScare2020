@@ -38,12 +38,14 @@ public class MiniGameTest : MiniGameManager
     {
         if (m_paused)
         {
-            m_timer += 1 * Time.deltaTime;
+            return;
+        }
+        
+        m_timer += 1 * Time.deltaTime;
 
-            if (m_timer > 10)
-            {
-                DoneGame.Invoke(50);
-            }
+        if (m_timer > 10)
+        {
+            DoneGame.Invoke(50);
         }
     }
 }

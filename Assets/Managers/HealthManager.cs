@@ -13,15 +13,23 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float m_health; //Only serialized for editor viewing purposes
     private float m_drainRate;
 
+    private bool m_paused;
+
     // Start is called before the first frame update
     void Start()
     {
+        m_paused = false;
         m_health = MAX_HEALTH;
         m_drainRate = STANDARD_DRAIN_RATE;
     }
 
     void FixedUpdate()
     {
+        if (m_paused)
+        {
+            return;
+        }
+        
         float tt = Time.deltaTime;
 
         m_health -= m_drainRate * tt;

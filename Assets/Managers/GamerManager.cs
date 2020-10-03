@@ -60,11 +60,13 @@ public class GamerManager : MonoBehaviour
 
     public void Pause() {
         m_paused = true;
+        m_healthManager.Pause();
         m_currentGameManager.Pause();
     }
 
     public void Unpause() {
         m_paused = false;
+        m_healthManager.Unpause();
         m_currentGameManager.Unpause();
     }
 
