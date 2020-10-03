@@ -10,9 +10,11 @@ public abstract class MiniGameManager :  MonoBehaviour
     protected bool m_paused = false;
 
     public UnityAction<int, int> DoneGame;
-    public virtual void StartGame(int side, float difficulty)
+    protected GameObject m_gameArea;
+    public virtual void StartGame(int side, float difficulty, GameObject gameArea)
     {
         m_side = side;
+        m_gameArea = gameArea;
     }
 
     public virtual void DestroySelf() { Destroy(this.gameObject); }
@@ -93,7 +95,7 @@ public class GamerManager : MonoBehaviour
         m_currentGame[side].transform.localPosition = new Vector2(0, 0);
         m_currentGameManager[side] = m_currentGame[side].GetComponent<MiniGameManager>();
         m_currentGameManager[side].DoneGame += FinishMiniGame;
-        m_currentGameManager[side].StartGame(side, m_difficultyModifier);
+        m_currentGameManager[side].StartGame(side, m_difficultyModifier, m_gameArea[side]);
     }
 
     void StartSpinner(int side)

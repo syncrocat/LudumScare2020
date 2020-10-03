@@ -14,9 +14,9 @@ public class MiniGameTest : MiniGameManager
         // Call basic shared destroy self 
         base.DestroySelf();
     }
-    public override void StartGame(int side, float difficulty)
+    public override void StartGame(int side, float difficulty, GameObject playArea)
     {
-        base.StartGame(side, difficulty);
+        base.StartGame(side, difficulty, playArea);
 
         Debug.Log("Starting minigame!");
     }

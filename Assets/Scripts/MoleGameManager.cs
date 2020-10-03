@@ -19,9 +19,9 @@ public class MoleGameManager : MiniGameManager
 
     private List<int> m_moleOrder;
 
-    public override void StartGame(int side, float difficulty)
+    public override void StartGame(int side, float difficulty, GameObject playArea)
     {
-        base.StartGame(side, difficulty);
+        base.StartGame(side, difficulty, playArea);
         m_molesToPreview = Math.Max(MAX_PREVIEW_MOLES - (int)(difficulty * 10), MIN_PREVIEW_MOLES);
         m_moles = m_moleObjects.Select(obj =>
         {

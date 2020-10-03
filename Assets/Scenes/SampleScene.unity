@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -208,27 +207,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!223 &519420033
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!224 &519420034
 RectTransform:
   m_ObjectHideFlags: 0
@@ -460,7 +438,7 @@ PrefabInstance:
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_games.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
@@ -476,11 +454,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_games.Array.data[0]
       value: 
-      objectReference: {fileID: 7262284576502769666, guid: 7b0c304a555b58341a5c320e638ef893,
+      objectReference: {fileID: 7228313301218265740, guid: 434faf1258bca4648a100caacd153e51,
         type: 3}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_games.Array.data[2]
+      value: 
+      objectReference: {fileID: 7228313301218265740, guid: 434faf1258bca4648a100caacd153e51,
+        type: 3}
+    - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
+        type: 3}
+      propertyPath: lineFactory
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9118873634382429008, guid: 4943b887af3919840995d1966610726a,
