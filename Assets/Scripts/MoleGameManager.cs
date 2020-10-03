@@ -76,7 +76,7 @@ public class MoleGameManager : MiniGameManager
         {
             if (touch.phase == TouchPhase.Began)
             {
-                RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
+                RaycastHit2D hit = Physics2D.Raycast(touch.position, Vector2.zero);
                 if (!(hit && hit.collider != null && hit.collider.gameObject != null))
                 {
                     continue;
