@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,40 +6,37 @@ public class MoleGameManager : MiniGameManager
 {
     [SerializeField] private List<GameObject> m_moleObjects;
 
-    private IList<Mole> m_moles;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private List<Mole> m_moles;
 
     public override void StartGame(int side, float difficulty)
     {
         base.StartGame(side, difficulty);
-
-        m_moles = m_moleObjects.Select(moleObject => moleObject.GetComponent<Mole>()).ToList();
+        m_moles = new List<Mole>();
+        foreach(var moleObject in m_moleObjects) {
+            m_moles.Add(moleObject.GetComponent<Mole>());
+        }
+        
         foreach (var mole in m_moles)
         {
             mole.SetSpritePopped();
         }
     }
 
-    protected override void FixedUpdate()
+    protected void Update()
     {
-        base.FixedUpdate();
+        if (m_paused) {
+            return;
+        }
 
         if (Input.GetMouseButtonDown(0)) {
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 touchPos2D = new Vector2(touchPos.x, touchPos.y);
-
-            RaycastHit2D hit = Physics2D.Raycast(touchPos2D, Vector2.zero);
-    
+            Debug.Log("Clicked!");
+            RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
             var moleHit = hit.collider?.gameObject?.GetComponent<Mole>();
             if (moleHit == null) {
                 return;
             }
 
+            Debug.Log("Clicked... A MOLE!");
             TapMole(moleHit);
         }
 
@@ -49,6 +45,7 @@ public class MoleGameManager : MiniGameManager
         {
             if (touch.phase == TouchPhase.Began)
             {
+                Debug.Log("Touched!");
                 Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 Vector2 touchPos2D = new Vector2(touchPos.x, touchPos.y);
 
@@ -59,6 +56,7 @@ public class MoleGameManager : MiniGameManager
                     continue;
                 }
 
+                Debug.Log("Touched... a MOLE!");
                 TapMole(moleHit);
             }
         }
@@ -66,6 +64,10 @@ public class MoleGameManager : MiniGameManager
 
     private void TapMole(Mole tappedMole)
     {
+        foreach(var mole in m_moles) {
+            Debug.Log(mole.Popped);
+        }
+
         tappedMole.Tapped();
 
         // Check to see if all moles are done
