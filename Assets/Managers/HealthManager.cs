@@ -66,7 +66,6 @@ public class HealthManager : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("We died!");
         // todo Death goes here
     }
 }

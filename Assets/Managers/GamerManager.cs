@@ -5,12 +5,36 @@ using UnityEngine.Events;
 
 public abstract class MiniGameManager :  MonoBehaviour
 {
-    public UnityAction<int> DoneGame;
-    public virtual void StartGame(float difficulty) { }
+    protected int m_side;
+    protected float m_timer = 0;
+    protected bool m_paused = false;
+
+    public UnityAction<int, int> DoneGame;
+    public virtual void StartGame(int side, float difficulty)
+    {
+        m_side = side;
+    }
+
     public virtual void DestroySelf() { Destroy(this.gameObject); }
 
-    public virtual void Pause() { }
-    public virtual void Unpause() { }
+    public virtual void Pause()
+    {
+        m_paused = true;
+    }
+    public virtual void Unpause()
+    {
+        m_paused = false;
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (m_paused)
+        {
+            return;
+        }
+
+        m_timer += 1 * Time.deltaTime;
+    }
 }
 
 [RequireComponent(typeof(HealthManager))]
@@ -23,9 +47,15 @@ public class GamerManager : MonoBehaviour
     [SerializeField] private List<GameObject> m_games;
     private HealthManager m_healthManager;
 
-    private GameObject m_currentGame;
-    private MiniGameManager m_currentGameManager;
-    private int m_currentGameIndex = -1;
+    // 0 is left, 1 is right
+    [SerializeField] private List<GameObject> m_gameArea;
+
+    private List<GameObject> m_currentGame = new List<GameObject>() { null, null };
+
+    private List<MiniGameManager> m_currentGameManager = new List<MiniGameManager>() { null, null };
+
+    private List<int> m_currentGameIndex = new List<int>(){ -1, -1 };
+
     [SerializeField] private float m_difficultyModifier = 0; //Only serialized for editor viewing purposes
 
     private bool m_paused = false;
@@ -34,54 +64,84 @@ public class GamerManager : MonoBehaviour
     void Start()
     {
         m_healthManager = GetComponent<HealthManager>();
-        StartMiniGame();
+        
+        StartMiniGame(0);
+        StartMiniGame(1);
     }
 
-    void StartMiniGame()
+    // Left side is 0, right side is 1
+    void StartMiniGame(int side)
     {
-        //  Start new game stuff
-        m_currentGameIndex = PickNewGameIndex();
-        m_currentGame = Instantiate(m_games[m_currentGameIndex], new Vector3(0, 0, 0), Quaternion.identity);
-        m_currentGameManager = m_currentGame.GetComponent<MiniGameManager>();
-        m_currentGameManager.DoneGame += FinishMiniGame;
-        m_currentGameManager.StartGame(m_difficultyModifier);
+        if (side < 0 || side > 1)
+        {
+            Debug.Log("No");
+            return;
+        }
+
+        var gameIndex = PickNewGameIndex(side);
+        m_currentGameIndex[side] = gameIndex;
+        m_currentGame[side] = Instantiate(m_games[gameIndex], new Vector2(0, 0), Quaternion.identity, m_gameArea[side].transform);
+        m_currentGame[side].transform.localPosition = new Vector2(0, 0);
+        m_currentGameManager[side] = m_currentGame[side].GetComponent<MiniGameManager>();
+        m_currentGameManager[side].DoneGame += FinishMiniGame;
+        m_currentGameManager[side].StartGame(side, m_difficultyModifier);
     }
 
-    void FinishMiniGame(int reward)
+    void FinishMiniGame(int side, int reward)
     {
         // End old game stuff
         m_healthManager.AddHP(reward);
-        m_currentGameManager.DoneGame -= FinishMiniGame;
-        m_currentGameManager.DestroySelf();
+        m_currentGameManager[side].DoneGame -= FinishMiniGame;
+        m_currentGameManager[side].DestroySelf();
 
         // Start new
-        StartMiniGame();
+        StartMiniGame(side);
     }
 
     public void Pause() {
         m_paused = true;
         m_healthManager.Pause();
-        m_currentGameManager.Pause();
+        foreach(var gameManager in m_currentGameManager)
+        {
+            gameManager.Pause();
+        }
     }
 
     public void Unpause() {
         m_paused = false;
         m_healthManager.Unpause();
-        m_currentGameManager.Unpause();
+        foreach(var gameManager in m_currentGameManager)
+        {
+            gameManager.Unpause();
+        }
     }
 
-    private int PickNewGameIndex()
+    private int PickNewGameIndex(int side)
     {
-        int maxIndex = m_games.Count;
-        if (m_currentGameIndex != -1 && m_games.Count > 1) maxIndex -= 1;
-        int gameIndex = Random.Range(0, maxIndex);
-
-        if  (m_currentGameIndex != -1 && m_games.Count > 1 && gameIndex >= m_currentGameIndex)
-        {
+        var maxIndex = m_games.Count;
+        var excludeIndex = m_currentGameIndex[side];
+        var excludeCount = m_currentGameIndex[side] == -1 ? 0 : 1;
+        var gameIndex = Random.Range(0, maxIndex - excludeCount);
+        if (gameIndex == excludeIndex) {
             gameIndex += 1;
         }
 
         return gameIndex;
+    }
+
+    void Update() {
+        // Check if Back was pressed this frame
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (m_paused) {
+                Unpause();
+            } else {
+                Pause();
+            }
+            // Quit the application
+            // SceneManager.LoadScene(0);
+            // Quit the application
+            // Application.Quit();
+        }
     }
 
     // Update is called once per frame
