@@ -16,6 +16,7 @@ public class BasketballManager : MiniGameManager
     [SerializeField] private GameObject basketball_position;
     [SerializeField] private GameObject basketball_prefab;
     [SerializeField] private GameObject basketball_net;
+    public GameObject ballholder2;
     private GameObject current_basketball;
     private Vector2 basketball_center;
     private float startTime;
@@ -90,6 +91,12 @@ public class BasketballManager : MiniGameManager
         if (m_paused)
         {
             return;
+        }
+
+        // Go behind the net
+        if (current_basketball.transform.position.y > basketball_net.transform.position.y + current_basketball.transform.GetComponent<CircleCollider2D>().radius)
+        {
+            current_basketball.transform.parent = ballholder2.transform;
         }
 
         GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
