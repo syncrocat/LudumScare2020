@@ -167,6 +167,7 @@ public class GamerManager : MonoBehaviour
         if (m_paused)
             return;
 
+      
         m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
         var states = new List<HealthState>();
         // Check any spinners for health updates
