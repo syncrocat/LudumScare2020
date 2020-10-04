@@ -49,6 +49,11 @@ public class BasketballManager : MiniGameManager
     // Update is called once per frame
     void Update()
     {
+        if (m_paused)
+        {
+            return;
+        }
+
         var tapCount = Input.touchCount;
         for (var i = 0; i < tapCount; i++)
         {
@@ -103,10 +108,5 @@ public class BasketballManager : MiniGameManager
 
        // Debug.Log("Successful swipe");
         return SUCCESS_SWIPE_HEIGHT;
-    }
-
-    protected override void FixedUpdate()
-    {
-        
     }
 }

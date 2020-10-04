@@ -69,6 +69,11 @@ public class SpinManager : MiniGameManager
     // for touch rotations
     void Update()
     {
+        if (m_paused)
+        {
+            return;
+        }
+
         float turnAngle = GetTurnDegrees();
         turnSinceLast += turnAngle;   
     }
@@ -76,6 +81,10 @@ public class SpinManager : MiniGameManager
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        if (m_paused)
+        {
+            return;
+        }
 
         if ((turnSinceLast > 0 && mode == Direction.CounterClockwise) || (turnSinceLast < 0 && mode == Direction.Clockwise))
         {
