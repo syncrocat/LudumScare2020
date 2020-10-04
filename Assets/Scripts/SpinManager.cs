@@ -48,6 +48,11 @@ public class SpinManager : MiniGameManager
         spinner_center = GetComponent<RectTransform>().position;
     }
 
+    protected override string GameName()
+    {
+        return "SPIN!";
+    }
+
     private float GetAngleRadians(Vector2 coordinate)
     {
         var delta_x = coordinate.x - spinner_center.x;

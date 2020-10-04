@@ -46,7 +46,9 @@ public class TopScoreManager : MonoBehaviour
         {
             var name = TopScores[i].name;
             var score = TopScores[i].score;
-            TopScoreTexts[i].text = $"{i + 1}. {name} - {score}";
+            var minutes = (int)(score / 60);
+            var seconds = score % 60;
+            TopScoreTexts[i].text = $"{i + 1}. {name} - {minutes}:{seconds:00}";
         }
     }
 

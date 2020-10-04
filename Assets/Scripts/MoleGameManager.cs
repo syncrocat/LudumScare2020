@@ -19,6 +19,11 @@ public class MoleGameManager : MiniGameManager
 
     private List<int> m_moleOrder;
 
+    protected override string GameName()
+    {
+        return "WHACK THE MOLES";
+    }
+
     public override void StartGame(int side, float difficulty, GameObject playArea)
     {
         base.StartGame(side, difficulty, playArea);

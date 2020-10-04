@@ -24,6 +24,11 @@ public class CardManager : MiniGameManager
 
     private float timer = 0;
 
+    protected override string GameName()
+    {
+        return "MATCH THE CARDS";
+    }
+
     public override void StartGame(int side, float difficulty, GameObject gameArea)
     {
         base.StartGame(side, difficulty, gameArea);

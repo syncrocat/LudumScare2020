@@ -37,6 +37,11 @@ public class BasketballManager : MiniGameManager
         //SUCCESS_SWIPE_HEIGHT = basketball_net.transform.position.y + SUCCESS_SWIPE_HEIGHT_MODIFIER;
     }
 
+    protected override string GameName()
+    {
+        return "SHOOT A BASKET";
+    }
+
     public override void StartGame(int side, float difficulty, GameObject playArea)
     {
         base.StartGame(side, difficulty, playArea);

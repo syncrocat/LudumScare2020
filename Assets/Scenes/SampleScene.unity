@@ -959,6 +959,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1652868029, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 2081251065, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
       propertyPath: GamerManager
       value: 
@@ -1072,6 +1076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Game Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094021148910518741, guid: 4f53d3e13f051124d82c3d57549e734b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}

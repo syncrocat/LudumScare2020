@@ -39,6 +39,11 @@ public class ShapesManager : MiniGameManager
 
     float scaleY;
 
+    protected override string GameName()
+    {
+        return "CONNECT THE DOTS";
+    }
+
     public override void StartGame(int side, float difficulty, GameObject gameArea)
     {
         base.StartGame(side, difficulty, gameArea);

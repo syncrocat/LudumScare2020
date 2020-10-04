@@ -12,10 +12,12 @@ public abstract class MiniGameManager :  MonoBehaviour
 
     public UnityAction<int, int> DoneGame;
     protected GameObject m_gameArea;
+
     public virtual void StartGame(int side, float difficulty, GameObject gameArea)
     {
         m_side = side;
         m_gameArea = gameArea;
+        m_gameArea.GetComponentInChildren<Text>().text = GameName();
     }
 
     public virtual void DestroySelf() { Destroy(this.gameObject); }
@@ -37,6 +39,11 @@ public abstract class MiniGameManager :  MonoBehaviour
         }
 
         m_timer += 1 * Time.deltaTime;
+    }
+
+    protected virtual string GameName()
+    {
+        return "DEFAULT GAME";
     }
 }
 
@@ -123,11 +130,14 @@ public class GamerManager : MonoBehaviour
 
     void Start()
     {
+        for (var i = 0; i < 2; i++)
+        {
+            m_gameArea[i].GetComponentInChildren<Text>().text = "";
+        }
         tutorialOver = false;
         m_healthManager.Pause();
         StartSpinner(0);
         m_score = 0;
-        
     }
 
     // Left side is 0, right side is 1
@@ -165,7 +175,7 @@ public class GamerManager : MonoBehaviour
     void FinishMiniGame(int side, int reward)
     {
         FindObjectOfType<SoundManager>().Play("FinishedMinigame");
-
+        m_gameArea[side].GetComponentInChildren<Text>().text = "NICE!";
         // End old game stuff
         m_healthManager.AddHP(reward);
         m_currentGameIndex[side] = -1;
@@ -276,7 +286,7 @@ public class GamerManager : MonoBehaviour
             m_score = (int)(Time.time - gameStartTime);
             var minutes = (int)(m_score / 60);
             var seconds = m_score % 60;
-            ScoreText.text = $"{minutes}:{seconds}";
+            ScoreText.text = $"{minutes}:{seconds:00}";
 
             if (m_healthManager.GetHP() < 0)
             {
@@ -410,6 +420,6 @@ public class GamerManager : MonoBehaviour
 
         var minutes = (int)(m_score / 60);
         var seconds = m_score % 60;
-        DeathScoreText.text = $"YOUR SCORE: {minutes}:{seconds}";
+        DeathScoreText.text = $"YOUR SCORE: {minutes}:{seconds:00}";
     }
 }
