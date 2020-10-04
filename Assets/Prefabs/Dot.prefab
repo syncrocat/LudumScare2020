@@ -90,3 +90,4 @@ MonoBehaviour:
   very_glowed_up: {fileID: 21300000, guid: c730b08eec294c145be2893dcc3ed034, type: 3}
   non_glowed_up: {fileID: 21300000, guid: da9e4590e1d0c7947a6f4ca201497a53, type: 3}
   expand_on_glowup: 1
+  optional_propagate_glow: {fileID: 0}

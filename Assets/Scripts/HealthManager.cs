@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+
     // Constants 
     readonly float MAX_HEALTH = 100;
     readonly float FINE_DRAIN_RATE = 5;
@@ -15,6 +16,8 @@ public class HealthManager : MonoBehaviour
 
     // Variables
     [SerializeField] private float m_health; //Only serialized for editor viewing purposes
+    [SerializeField] private RectTransform m_healthbarMask;
+    private float m_healthbarMaskHeight;
     private float m_drainRate;
 
     private bool m_paused;
@@ -25,6 +28,11 @@ public class HealthManager : MonoBehaviour
         m_paused = false;
         m_health = MAX_HEALTH;
         m_drainRate = FINE_DRAIN_RATE;
+    }
+
+    private void Start()
+    {
+        m_healthbarMaskHeight = m_healthbarMask.rect.height;
     }
 
     void FixedUpdate()
@@ -39,6 +47,11 @@ public class HealthManager : MonoBehaviour
         m_health -= m_drainRate * tt;
         if (m_health < 0)
             Die();
+
+
+        //m_healthbarMask.rect.height = m_healthbarMaskHeight * m_health / 100;
+
+        m_healthbarMask.sizeDelta = new Vector2(m_healthbarMask.rect.width, m_healthbarMaskHeight * m_health / 100);
 
         Debug($"HP: {GetHP()}");
     }

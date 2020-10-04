@@ -212,6 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &397682213 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8324659659424176055, guid: 4f53d3e13f051124d82c3d57549e734b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113426607089343947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &453556858 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 453556858, guid: 4f53d3e13f051124d82c3d57549e734b,
@@ -636,7 +642,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1347931843}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1129,6 +1135,11 @@ PrefabInstance:
       propertyPath: DebugText
       value: 
       objectReference: {fileID: 262721365}
+    - target: {fileID: 1332010898451826265, guid: 4943b887af3919840995d1966610726a,
+        type: 3}
+      propertyPath: m_healthbarMask
+      value: 
+      objectReference: {fileID: 397682213}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_games.Array.size

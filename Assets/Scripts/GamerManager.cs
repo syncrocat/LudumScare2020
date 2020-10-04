@@ -51,6 +51,7 @@ public class GamerManager : MonoBehaviour
     // Variables
     [SerializeField] private List<GameObject> m_games;
     [SerializeField] private GameObject m_spinnerPrefab;
+    
     private HealthManager m_healthManager;
 
     // 0 is left, 1 is right
@@ -104,6 +105,8 @@ public class GamerManager : MonoBehaviour
 
     private bool tutorialOver;
 
+    private int previousGameIndex = -1;
+
     // TODO when you start a spinner, it needs a short grace period where it doesnt penalize you for not spinning
 
     // Start is called before the first frame update
@@ -124,6 +127,7 @@ public class GamerManager : MonoBehaviour
         m_healthManager.Pause();
         StartSpinner(0);
         m_score = 0;
+        
     }
 
     // Left side is 0, right side is 1
@@ -202,6 +206,8 @@ public class GamerManager : MonoBehaviour
 
     private int PickNewGameIndex(int side)
     {
+        /*
+         * Pretty sure this is just wrong but maybe there's hidden functionality I didn't understand
         var maxIndex = m_games.Count;
         var excludeIndex = m_currentGameIndex[side];
         var excludeCount = m_currentGameIndex[side] == -1 ? 0 : 1;
@@ -209,6 +215,18 @@ public class GamerManager : MonoBehaviour
         if (gameIndex == excludeIndex) {
             gameIndex += 1;
         }
+        */
+
+        var maxIndex = m_games.Count;
+        var excludeIndex = previousGameIndex;
+        var excludeCount = previousGameIndex == -1 ? 0 : 1;
+        var gameIndex = Random.Range(0, maxIndex - excludeCount);
+        if (gameIndex >= excludeIndex)
+        {
+            gameIndex += 1;
+        }
+
+        previousGameIndex = gameIndex;
 
         return gameIndex;
     }
