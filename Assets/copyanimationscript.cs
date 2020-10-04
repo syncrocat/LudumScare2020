@@ -17,6 +17,9 @@ public class copyanimationscript : MonoBehaviour
     void Start()
     {
         paste.enabled = true;
+
+        copy_light.gameObject.GetComponent<Animator>().speed = 2;
+        copy_dark.gameObject.GetComponent<Animator>().speed = 2;
     }
 
     // Update is called once per frame
