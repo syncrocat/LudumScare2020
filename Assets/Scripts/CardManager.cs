@@ -128,8 +128,6 @@ public class CardManager : MiniGameManager
                     continue;
                 }
 
-                //Debug.Log("Clicked..... A CARD!");
-
                 // Turn all the cards  over to start
                 if (startTurned)
                 {

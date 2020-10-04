@@ -167,8 +167,6 @@ public class SpinManager : MiniGameManager
                      * Finding out where a line intersects a circle turns out to be a fucking nightmare
                      * */
 
-                    //Debug.Log("Previous: " + line_pos_1 + ",, Current: " + line_pos_2);
-
                     float angle1 = GetAngleRadians(line_pos_1);
                     float angle2 = GetAngleRadians(line_pos_2);
 

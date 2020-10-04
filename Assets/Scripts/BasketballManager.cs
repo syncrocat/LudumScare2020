@@ -59,7 +59,6 @@ public class BasketballManager : MiniGameManager
         if (ScoredGoal)
         {
             DoneGame?.Invoke(m_side, 50);
-            Debug.Log("hello we won");
         }
 
         current_basketball = Instantiate(basketball_prefab, basketball_center, Quaternion.identity);
@@ -159,7 +158,6 @@ public class BasketballManager : MiniGameManager
         if (swipeMagnitude < MINIMUM_SWIPE_MAGNITUDE)
             return FAILED_SWIPE_HEIGHT;
 
-       // Debug.Log("Successful swipe");
         return SUCCESS_SWIPE_HEIGHT;
     }
 }

@@ -26,7 +26,6 @@ public class CardScript : MonoBehaviour
     public void SetCard(int x)
     {
         cardType = x;
-        Debug.Log("Set card to type " + x);
     }
 
     public void FlipCard()
