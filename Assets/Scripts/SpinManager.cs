@@ -86,10 +86,12 @@ public class SpinManager : MiniGameManager
             return;
         }
 
-        if ((turnSinceLast > 0 && mode == Direction.CounterClockwise) || (turnSinceLast < 0 && mode == Direction.Clockwise))
+        spinnerImg.transform.Rotate(new Vector3(0, 0, 4f));
+
+        /*if ((turnSinceLast > 0 && mode == Direction.CounterClockwise) || (turnSinceLast < 0 && mode == Direction.Clockwise))
         {
-            spinnerImg.transform.Rotate(new Vector3(0, 0, turnSinceLast));
-        }
+            
+        }*/
 
         speed = (turnSinceLast / Time.deltaTime);
         if (speed < 0)
@@ -108,13 +110,13 @@ public class SpinManager : MiniGameManager
 
         Debug($"Speed: {rollingAverage}");
         // Calculate state to send to velocitymanager
-        if (speed > 500)
+        if (speed > 250)
         {
             SpinState = SpinState.ReallyFine;
-        } else if (speed > 300)
+        } else if (speed > 150)
         {
             SpinState = SpinState.Fine;
-        } else if (speed > 150)
+        } else if (speed > 75)
         {
             SpinState = SpinState.Bad;
         } else

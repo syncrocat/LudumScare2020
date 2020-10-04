@@ -133,7 +133,7 @@ public class GamerManager : MonoBehaviour
     // Left side is 0, right side is 1
     void StartMiniGame(int side, GameObject gameOverride = null)
     {
-        NotificationSystem.Alert(side, AlertLevel.Low);
+        // NotificationSystem.Alert(side, AlertLevel.Low);
 
         if (side < 0 || side > 1)
         {
@@ -176,6 +176,7 @@ public class GamerManager : MonoBehaviour
         waitingForNewGame = true;
         startNewGameTimer = START_NEW_GAME_TIMER_INTERVAL;
         newGameSide = side;
+        NotificationSystem.CancelAlert(side, AlertLevel.High);
     }
 
     public void Pause() {
@@ -295,16 +296,32 @@ public class GamerManager : MonoBehaviour
                 switch (spinManager.SpinState)
                 {
                     case SpinState.ReallyFine:
-                        NotificationSystem.CancelAlert(i, AlertLevel.High);
+                        if (spinManager.VelocityManager.GetCurrentVelocity() > 70f)
+                        {
+                            NotificationSystem.CancelAlert(i, AlertLevel.High);
+                        }
+                        
                         break;
                     case SpinState.Fine:
-                        NotificationSystem.CancelAlert(i, AlertLevel.High);
+                        if (spinManager.VelocityManager.GetCurrentVelocity() > 70f)
+                        {
+                            NotificationSystem.CancelAlert(i, AlertLevel.High);
+                        }
+
                         break;
                     case SpinState.Bad:
-                        NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                        if (spinManager.VelocityManager.GetCurrentVelocity() < 40f)
+                        {
+                            NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                        }
+
                         break;
                     case SpinState.ReallyBad:
-                        NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                        if (spinManager.VelocityManager.GetCurrentVelocity() < 40f)
+                        {
+                            NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                        }
+
                         break;
                 }
 
