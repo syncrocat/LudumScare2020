@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class BallScript : MonoBehaviour
 {
@@ -40,9 +41,9 @@ public class BallScript : MonoBehaviour
         //hSpeed = newVector.x;
 
         //rigidBody.AddForce(newVector * 70);
+        newVector = new Vector2(newVector.x * 0.5f, newVector.y);
 
-
-        rigidBody.velocity += newVector * (1.65f / 2.4f * scaleY);
+        rigidBody.velocity += newVector * (1.8f / 2.4f * scaleY);
         rigidBody.gravityScale = 300 / 2.4f * scaleY;
         timer = 0;
 
@@ -54,6 +55,11 @@ public class BallScript : MonoBehaviour
         if (timer >= 0)
         {
             timer += Time.fixedDeltaTime;
+            if (rigidBody.velocity.y > 0)
+            {
+                var sizeFactor = Time.fixedDeltaTime * 0.3f;
+                this.gameObject.transform.localScale -= new Vector3(sizeFactor, sizeFactor, 0);
+            }
         }
         if (rigidBody.velocity.y < 0)
         {

@@ -25,6 +25,9 @@ public class BasketballManager : MiniGameManager
     private float swipeDuration;
     private bool ballReadyToShoot;
 
+    int movespeed = 100;
+    public GameObject m_movingComponent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,17 +36,48 @@ public class BasketballManager : MiniGameManager
         //SUCCESS_SWIPE_HEIGHT = basketball_net.transform.position.y + SUCCESS_SWIPE_HEIGHT_MODIFIER;
     }
 
-    void SpawnNewBall(bool ScoredGoal = false)
+    public override void StartGame(int side, float difficulty, GameObject playArea)
+    {
+        base.StartGame(side, difficulty, playArea);
+
+        if (difficulty > 20)
+        {
+            movespeed = 20;
+        }
+
+    }
+
+        void SpawnNewBall(bool ScoredGoal = false)
     {
         if (ScoredGoal)
         {
             DoneGame?.Invoke(m_side, 50);
+            Debug.Log("hello we won");
         }
 
         current_basketball = Instantiate(basketball_prefab, basketball_center, Quaternion.identity);
         current_basketball.transform.parent = gameObject.transform;
         current_basketball.GetComponent<BallScript>().BallDead += SpawnNewBall;
         ballReadyToShoot = true;
+    }
+
+    int direction = 1;
+
+    private void FixedUpdate()
+    {
+        if (m_paused)
+            return;
+
+
+        Vector3 newPosition = m_movingComponent.transform.position + new Vector3(movespeed * direction * Time.fixedDeltaTime, 0, 0);
+
+        if  (newPosition.x > m_gameArea.transform.position.x + 500 || newPosition.x < m_gameArea.transform.position.x - 500) {
+            direction *= -1;
+            newPosition += new Vector3(Mathf.Abs(m_gameArea.transform.position.x - newPosition.x) * direction * 2, 0, 0);
+        }
+
+        m_movingComponent.transform.position = newPosition;
+
     }
 
     // Update is called once per frame
