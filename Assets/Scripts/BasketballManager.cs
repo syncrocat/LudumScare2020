@@ -38,6 +38,7 @@ public class BasketballManager : MiniGameManager
         if (ScoredGoal)
         {
             DoneGame?.Invoke(m_side, 50);
+            Debug.Log("hello we won");
         }
 
         current_basketball = Instantiate(basketball_prefab, basketball_center, Quaternion.identity);
