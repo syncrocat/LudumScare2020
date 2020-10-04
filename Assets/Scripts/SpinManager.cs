@@ -192,4 +192,16 @@ public class SpinManager : MiniGameManager
 
         DebugText.text = text;
     }
+
+    public override void Pause()
+    {
+        base.Pause();
+        VelocityManager.Pause();
+    }
+
+    public override void Unpause()
+    {
+        base.Unpause();
+        VelocityManager.Unpause();
+    }
 }

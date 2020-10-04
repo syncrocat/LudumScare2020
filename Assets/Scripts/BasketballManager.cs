@@ -160,4 +160,16 @@ public class BasketballManager : MiniGameManager
 
         return SUCCESS_SWIPE_HEIGHT;
     }
+
+    public override void Pause()
+    {
+        base.Pause();
+        current_basketball.GetComponent<BallScript>().Pause();
+    }
+
+    public override void Unpause()
+    {
+        base.Unpause();
+        current_basketball.GetComponent<BallScript>().Unpause();
+    }
 }

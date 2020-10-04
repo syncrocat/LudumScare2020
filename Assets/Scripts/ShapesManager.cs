@@ -150,6 +150,11 @@ public class ShapesManager : MiniGameManager
 
     protected void Update()
     {
+        if (m_paused)
+        {
+            return;
+        }
+
         if (currentIndex >= le_dottlers.Count)
             return;
 

@@ -20,6 +20,10 @@ public class MiniGameTest : MiniGameManager
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        if (m_paused)
+        {
+            return;
+        }
 
         if (m_timer > 10)
         {

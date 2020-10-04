@@ -17,6 +17,7 @@ public class VelocityBarManager : MonoBehaviour
 
     public GameObject water;
 
+    private bool m_paused;
 
     private SpinState m_spinState;
     private readonly Dictionary<SpinState, float> m_velocityMapping = new Dictionary<SpinState, float>()
@@ -91,6 +92,10 @@ public class VelocityBarManager : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (m_paused)
+        {
+            return;
+        }
 
         AddVelocity(m_velocityMapping[m_spinState] * Time.fixedDeltaTime);
         Debug($"Velocity: {m_currentVelocity}%");
@@ -98,7 +103,6 @@ public class VelocityBarManager : MonoBehaviour
         var offBar = 300 * scaleY / 2.4f * ((100 - GetCurrentVelocity()) / 100);
 
         water.transform.position = new Vector3(water.transform.position.x,  defaultWaterPosition.y - offBar, 0);
-
     }
 
     public HealthState GetHealthState()
@@ -131,6 +135,13 @@ public class VelocityBarManager : MonoBehaviour
         DebugText.text = text;
     }
 
+    public void Pause()
+    {
+        m_paused = true;
+    }
 
-
+    public void Unpause()
+    {
+        m_paused = false;
+    }
 }

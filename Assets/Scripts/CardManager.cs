@@ -96,6 +96,11 @@ public class CardManager : MiniGameManager
     {
         base.FixedUpdate();
 
+        if (m_paused)
+        {
+            return;
+        }
+
         if (startTheClock)
         {
             timer += Time.fixedDeltaTime;
@@ -110,6 +115,11 @@ public class CardManager : MiniGameManager
 
     protected void Update()
     {
+        if (m_paused)
+        {
+            return;
+        }
+
         // Check for touches on any moles
         foreach (Touch touch in Input.touches)
         {
@@ -195,5 +205,21 @@ public class CardManager : MiniGameManager
         }
     }
 
+    public override void Pause()
+    {
+        base.Pause();
+        for (int i = 0; i < numCards; i++)
+        {
+            cards[i].GetComponent<CardScript>().Pause();
+        }
+    }
 
+    public override void Unpause()
+    {
+        base.Unpause();
+        for (int i = 0; i < numCards; i++)
+        {
+            cards[i].GetComponent<CardScript>().Unpause();
+        }
+    }
 }
