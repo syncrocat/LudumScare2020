@@ -973,6 +973,38 @@ MonoBehaviour:
     loop: 1
     muteProfile: 1
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: dbaa9bbec329b344cb13a501f24cfbf2, type: 3}
+    volume: 0.5
+    pitch: 1
+    name: Good
+    playOnAwake: 0
+    loop: 0
+    muteProfile: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: b29abb7e9501f4f46a6d90d48ab9e07e, type: 3}
+    volume: 0.5
+    pitch: 1
+    name: Bad
+    playOnAwake: 0
+    loop: 0
+    muteProfile: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 6ba7c3631fd6ca14285feba44c6ecafb, type: 3}
+    volume: 0.5
+    pitch: 1
+    name: DotConnect
+    playOnAwake: 0
+    loop: 0
+    muteProfile: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 2846ac76f2ccbd2439c7ec058e9604da, type: 3}
+    volume: 0.5
+    pitch: 1
+    name: CardMatchFail
+    playOnAwake: 0
+    loop: 0
+    muteProfile: 0
+    source: {fileID: 0}
   SfxMuted: 0
   MusicMuted: 0
 --- !u!4 &1231477538

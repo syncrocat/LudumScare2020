@@ -110,7 +110,6 @@ public class CardManager : MiniGameManager
 
     protected void Update()
     {
-
         // Check for touches on any moles
         foreach (Touch touch in Input.touches)
         {
@@ -168,6 +167,7 @@ public class CardManager : MiniGameManager
                         // If they match
                         if (previousUp.cardType == moleHit.cardType)
                         {
+                            FindObjectOfType<SoundManager>().Play("Good");
                             cards.Remove(previousUp.gameObject);
                             cards.Remove(moleHit.gameObject);
                             numCards -= 2;
@@ -182,11 +182,11 @@ public class CardManager : MiniGameManager
                             }
                         } else
                         {
+                            FindObjectOfType<SoundManager>().Play("CardMatchFail");
                             previousUp.DelayThenHide();
                             moleHit.DelayThenHide();
                             previousUp = null;
                         }
-
                     } else
                     {
                         previousUp = moleHit;

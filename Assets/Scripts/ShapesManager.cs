@@ -219,6 +219,8 @@ public class ShapesManager : MiniGameManager
             joinMe[currentIndex - 2].GetComponent<DotScript>().GlowMeUpScotty();
         le_dottlers[currentIndex - 1].GetComponent<DotScript>().GlowMeUpISaid();
 
+        FindObjectOfType<SoundManager>().Play("DotConnect");
+
         if (currentIndex >= le_dottlers.Count)
         {
             DoneGame?.Invoke(m_side, 50);
