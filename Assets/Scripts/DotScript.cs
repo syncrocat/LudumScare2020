@@ -32,7 +32,11 @@ public class DotScript : MonoBehaviour
             gameObject.transform.localScale = new Vector3(2, 2, 1);
 
         if (optional_propagate_glow != null)
+        {
             optional_propagate_glow?.GetComponent<MemeArrowScript>().GlowMeUpScotty();
+
+        }
+            
     }
 
     public void GlowMeUpISaid()
