@@ -102,6 +102,7 @@ public class MoleGameManager : MiniGameManager
     {
         if (tappedMole.Tapped(m_currentMole))
         {
+            FindObjectOfType<SoundManager>().Play("MoleHit");
             // Show the next moles we need to
             m_currentMole += 1;
             if (m_currentMole >= m_moles.Count)
