@@ -241,7 +241,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 61}
-  m_SizeDelta: {x: 280, y: 36}
+  m_SizeDelta: {x: 344, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6537804157487942663
 CanvasRenderer:
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fb90b0b849455a04687b123ddaaf5dd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7374b4f6274171042b61cb9b14ca76ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -335,6 +335,7 @@ MonoBehaviour:
   basketball_prefab: {fileID: 9036433534244784124, guid: 9f7f22864b4ac864b9aedec8cdb239ac,
     type: 3}
   basketball_net: {fileID: 6096603940378926045}
+  m_movingComponent: {fileID: 6096603940378926045}
 --- !u!222 &7684875446738564227
 CanvasRenderer:
   m_ObjectHideFlags: 0
