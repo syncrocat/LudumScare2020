@@ -275,6 +275,7 @@ public class GamerManager : MonoBehaviour
             }
 
             m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
+            m_healthManager.CurrentDifficultyMultiplier = m_difficultyModifier;
             var states = new List<HealthState>();
             // Check any spinners for health updates
             for (var i = 0; i < m_currentGame.Count; i++)

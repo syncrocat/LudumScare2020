@@ -22,6 +22,8 @@ public class HealthManager : MonoBehaviour
 
     private bool m_paused;
 
+    public float CurrentDifficultyMultiplier;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -44,10 +46,13 @@ public class HealthManager : MonoBehaviour
 
         float tt = Time.deltaTime;
 
-        m_health -= m_drainRate * tt;
-        if (m_health < 0)
-            Die();
 
+        // CurrentDifficultyMultiplier starts at 0 and goes up by 0.01 per second
+        // After 200 seconds we'd like the drain rate to be as it stands now
+        // At the beginning there should be maybe 1/10th the drain rate
+        // So take the max of multiplier/2 and 1/10th?
+        var difficultyMod = Mathf.Max(1/10, CurrentDifficultyMultiplier / 2);
+        m_health -= m_drainRate * tt * difficultyMod;
 
         //m_healthbarMask.rect.height = m_healthbarMaskHeight * m_health / 100;
 
@@ -66,8 +71,6 @@ public class HealthManager : MonoBehaviour
     public void RemoveHP(float x)
     {
         m_health -= x;
-        if (m_health < 0)
-            Die();
     }
 
     public float GetHP()
@@ -97,11 +100,6 @@ public class HealthManager : MonoBehaviour
                 m_drainRate = EMPTY_DRAIN_RATE;
                 break;
         }
-    }
-
-    private void Die()
-    {
-        // todo Death goes here
     }
 
     private void Debug(string text)
