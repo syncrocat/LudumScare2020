@@ -46,11 +46,6 @@ public class TwoLinesManager : MiniGameManager
         var realStart1 = (Vector2)gameOrigin + new Vector2(-10 / scale.x, -10 / scale.y);
         var realEnd1 = (Vector2)gameOrigin + new Vector2(10 / scale.x, 10 / scale.y);
 
-       // Debug.Log($"{scale} {realStart1} {realEnd1}");
-
-
-
-
         /*float height = Camera.main.orthographicSize * 2.0f;
         float width = height * Camera.main.aspect;
         float gameWidth = width * 0.3f; // TODO tweak

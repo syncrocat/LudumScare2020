@@ -21,6 +21,8 @@ public class BallScript : MonoBehaviour
 
     public UnityAction<bool> BallDead;
 
+    private bool m_paused;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +33,10 @@ public class BallScript : MonoBehaviour
         scaleY = canv.GetComponent<RectTransform>().localScale.y;
 
         this.transform.localScale *=  scaleY / 2.4f;
-
     }
 
     public void ShootMe(float shootHeight, Vector2 shootVector)
     {
-
         var shootHComponent = shootVector.y;
         var factor = shootHeight / shootHComponent;
         Vector2 newVector = shootVector * factor;
@@ -56,6 +56,11 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (m_paused)
+        {
+            return;
+        }
+
         if (timer >= 0)
         {
             timer += Time.fixedDeltaTime;
@@ -83,8 +88,16 @@ public class BallScript : MonoBehaviour
         if (collision.gameObject.CompareTag("BasketballNet"))
         {
             scoredGoal = true;
-
-
         }
+    }
+
+    public void Pause()
+    {
+        m_paused = true;
+    }
+
+    public void Unpause()
+    {
+        m_paused = false;
     }
 }

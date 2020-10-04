@@ -147,7 +147,6 @@ public class GamerManager : MonoBehaviour
 
         if (side < 0 || side > 1)
         {
-            Debug.Log("No");
             return;
         }
 

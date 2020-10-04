@@ -15,6 +15,7 @@ public class CardScript : MonoBehaviour
 
     public float internalTimer = 0;
 
+    private bool m_paused;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,6 @@ public class CardScript : MonoBehaviour
     public void SetCard(int x)
     {
         cardType = x;
-        Debug.Log("Set card to type " + x);
     }
 
     public void FlipCard()
@@ -56,6 +56,11 @@ public class CardScript : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (m_paused)
+        {
+            return;
+        }
+
         if (killing)
         {
             internalTimer += Time.fixedDeltaTime;
@@ -84,5 +89,13 @@ public class CardScript : MonoBehaviour
 
     }
 
+    public void Pause()
+    {
+        m_paused = true;
+    }
 
+    public void Unpause()
+    {
+        m_paused = false;
+    }
 }
