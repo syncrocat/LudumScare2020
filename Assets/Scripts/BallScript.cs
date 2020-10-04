@@ -21,6 +21,7 @@ public class BallScript : MonoBehaviour
 
     public UnityAction<bool> BallDead;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +30,13 @@ public class BallScript : MonoBehaviour
         GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
         scaleY = canv.GetComponent<RectTransform>().localScale.y;
 
+        this.transform.localScale *=  scaleY / 2.4f;
+
     }
 
     public void ShootMe(float shootHeight, Vector2 shootVector)
     {
+
         var shootHComponent = shootVector.y;
         var factor = shootHeight / shootHComponent;
         Vector2 newVector = shootVector * factor;

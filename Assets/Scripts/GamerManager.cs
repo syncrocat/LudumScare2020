@@ -220,7 +220,7 @@ public class GamerManager : MonoBehaviour
 
         var maxIndex = m_games.Count;
         var excludeIndex = previousGameIndex;
-        var excludeCount = previousGameIndex == -1 ? 0 : 1;
+        var excludeCount = (previousGameIndex == -1 && m_games.Count <= 1) ? 0 : 1;
         var gameIndex = Random.Range(0, maxIndex - excludeCount);
         if (gameIndex >= excludeIndex && excludeCount == 1)
         {
