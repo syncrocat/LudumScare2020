@@ -37,6 +37,8 @@ public class SpinManager : MiniGameManager
 
     public Text DebugText;
 
+    public SpinState SpinState;
+
     [SerializeField] private GameObject spinnerImg = null;
 
     // Start is called before the first frame update
@@ -97,22 +99,21 @@ public class SpinManager : MiniGameManager
 
         Debug($"Speed: {rollingAverage}");
         // Calculate state to send to velocitymanager
-        SpinState spinState;
         if (speed > 500)
         {
-            spinState = SpinState.ReallyFine;
+            SpinState = SpinState.ReallyFine;
         } else if (speed > 300)
         {
-            spinState = SpinState.Fine;
+            SpinState = SpinState.Fine;
         } else if (speed > 150)
         {
-            spinState = SpinState.Bad;
+            SpinState = SpinState.Bad;
         } else
         {
-            spinState = SpinState.ReallyBad;
+            SpinState = SpinState.ReallyBad;
         }
 
-        VelocityManager.SetSpinState(spinState);
+        VelocityManager.SetSpinState(SpinState);
 
         turnSinceLast = 0;
     }

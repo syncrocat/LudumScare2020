@@ -66,9 +66,14 @@ public class GamerManager : MonoBehaviour
     public GameObject GameCanvas;
     public GameObject PauseCanvas;
 
+    public GameObject NotificationSystemObject;
+
+    private NotificationSystem NotificationSystem;
+
     // Start is called before the first frame update
     void Start()
     {
+        NotificationSystem = NotificationSystemObject.GetComponent<NotificationSystem>();
         PauseCanvas.SetActive(false);
         GameCanvas.SetActive(true);
         m_healthManager = GetComponent<HealthManager>();
@@ -81,6 +86,8 @@ public class GamerManager : MonoBehaviour
     // Left side is 0, right side is 1
     void StartMiniGame(int side, GameObject gameOverride = null)
     {
+        NotificationSystem.Alert(side, AlertLevel.Low);
+
         if (side < 0 || side > 1)
         {
             Debug.Log("No");
@@ -128,8 +135,10 @@ public class GamerManager : MonoBehaviour
             gameManager.Pause();
         }
 
+        NotificationSystem.Pause();
         PauseCanvas.SetActive(true);
         GameCanvas.SetActive(false);
+        
     }
 
     public void Unpause() {
@@ -140,6 +149,7 @@ public class GamerManager : MonoBehaviour
             gameManager.Unpause();
         }
 
+        NotificationSystem.Unpause();
         PauseCanvas.SetActive(false);
         GameCanvas.SetActive(true);
     }
@@ -181,12 +191,29 @@ public class GamerManager : MonoBehaviour
         m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
         var states = new List<HealthState>();
         // Check any spinners for health updates
-        foreach(var game in m_currentGame)
+        for(var i = 0; i < m_currentGame.Count; i++)
         {
+            var game = m_currentGame[i];
             var spinManager = game.GetComponent<SpinManager>();
             if (spinManager == null)
             {
                 continue;
+            }
+
+            switch(spinManager.SpinState)
+            {
+                case SpinState.ReallyFine:
+                    NotificationSystem.CancelAlert(i, AlertLevel.High);
+                    break;
+                case SpinState.Fine:
+                    NotificationSystem.CancelAlert(i, AlertLevel.High);
+                    break;
+                case SpinState.Bad:
+                    NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                    break;
+                case SpinState.ReallyBad:
+                    NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                    break;
             }
 
             states.Add(spinManager.GetHealthState());
@@ -194,8 +221,9 @@ public class GamerManager : MonoBehaviour
 
         // Assuming we want the worst performance of all current spinners to be what affects our hp
         var worstState = HealthState.Fine;
-        foreach(var state in states)
+        for (var i = 0; i < states.Count; i++)
         {
+            var state = states[i];
             switch(worstState)
             {
                 case HealthState.Fine:

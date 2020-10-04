@@ -212,6 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &453556858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 453556858, guid: 4f53d3e13f051124d82c3d57549e734b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113426607089343947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,11 +999,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8424114678453722522, guid: 4f53d3e13f051124d82c3d57549e734b,
-        type: 3}
-      propertyPath: m_Name
-      value: Pause Button
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
 --- !u!1001 &7041504654249843300
@@ -1020,7 +1021,7 @@ PrefabInstance:
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_games.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
@@ -1036,7 +1037,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_games.Array.data[0]
       value: 
-      objectReference: {fileID: 7228313301218265740, guid: 434faf1258bca4648a100caacd153e51,
+      objectReference: {fileID: 7262284576502769666, guid: 7b0c304a555b58341a5c320e638ef893,
         type: 3}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
@@ -1059,6 +1060,17 @@ PrefabInstance:
       propertyPath: PauseCanvas
       value: 
       objectReference: {fileID: 925833392}
+    - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
+        type: 3}
+      propertyPath: NotificationSystemObject
+      value: 
+      objectReference: {fileID: 453556858}
+    - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
+        type: 3}
+      propertyPath: m_games.Array.data[1]
+      value: 
+      objectReference: {fileID: 2745500735430325179, guid: 381d36584d4686c49a14eece5b6325f2,
+        type: 3}
     - target: {fileID: 9118873634382429008, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_LocalPosition.x
