@@ -1143,7 +1143,7 @@ PrefabInstance:
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
       propertyPath: m_games.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
@@ -1159,7 +1159,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_games.Array.data[0]
       value: 
-      objectReference: {fileID: 8430249475823549049, guid: a40eb88b6be313d409b99ff43f71e24d,
+      objectReference: {fileID: 7262284576502769666, guid: 7b0c304a555b58341a5c320e638ef893,
         type: 3}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
