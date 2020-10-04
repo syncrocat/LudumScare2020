@@ -100,6 +100,11 @@ public class VelocityBarManager : MonoBehaviour
         return HealthState.Empty;
     }
 
+    public float GetCurrentVelocity()
+    {
+        return m_currentVelocity;
+    }
+
     private void Debug(string text)
     {
         if (DebugText == null)
