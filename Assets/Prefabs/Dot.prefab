@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 6339990434432027615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 208, y: 208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8483461705161858323
 CanvasRenderer:
@@ -59,12 +59,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.54509807, g: 0.54509807, b: 0.54509807, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da9e4590e1d0c7947a6f4ca201497a53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e2e51c67e3c5ab4394f89ec9c0bbdf4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242a7c9c0e5c438418736e801915ab2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowed_up: {fileID: 21300000, guid: ae31108c12f4821408e7550e26985fe8, type: 3}
-  very_glowed_up: {fileID: 21300000, guid: c730b08eec294c145be2893dcc3ed034, type: 3}
-  non_glowed_up: {fileID: 21300000, guid: da9e4590e1d0c7947a6f4ca201497a53, type: 3}
-  expand_on_glowup: 1
+  glowed_up: {fileID: 21300000, guid: 82d2a7a50e2045146848ba2c34933418, type: 3}
+  very_glowed_up: {fileID: 21300000, guid: 6900f6ea4709794409171ac8e1b6dd33, type: 3}
+  non_glowed_up: {fileID: 21300000, guid: 9e2e51c67e3c5ab4394f89ec9c0bbdf4, type: 3}
+  expand_on_glowup: 0
   optional_propagate_glow: {fileID: 0}

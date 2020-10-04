@@ -167,7 +167,7 @@ public class ShapesManager : MiniGameManager
 
             var dist_from_center = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(spinner_center.x - touch.position.x), 2) + Mathf.Pow(Mathf.Abs(spinner_center.y - touch.position.y), 2));
 
-            if (dist_from_center < OUTER_SPIN_RADIUS)
+            if (dist_from_center < OUTER_SPIN_RADIUS * scaleY / 2.4f)
             {
                 if (fingerId == -1)
                 {

@@ -21,8 +21,8 @@ public enum SpinState
 public class SpinManager : MiniGameManager
 {
     //Constants
-    private readonly float INNER_SPIN_RADIUS = 100;
-    private readonly float OUTER_SPIN_RADIUS = 350;
+    private readonly float INNER_SPIN_RADIUS = 150;
+    private readonly float OUTER_SPIN_RADIUS = 450;
     private readonly Direction DEFAULT_SPIN_DIRECTION = Direction.CounterClockwise;
 
     // Vars
@@ -136,6 +136,9 @@ public class SpinManager : MiniGameManager
 
     public float GetTurnDegrees()
     {
+        GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
+        var scaleY = canv.GetComponent<RectTransform>().localScale.y;
+
         var tapCount = Input.touchCount;
         for (var i = 0; i < tapCount; i++)
         {
@@ -145,7 +148,7 @@ public class SpinManager : MiniGameManager
 
             var dist_from_center = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(spinner_center.x - touch.position.x), 2) + Mathf.Pow(Mathf.Abs(spinner_center.y - touch.position.y), 2));
 
-            if (dist_from_center > INNER_SPIN_RADIUS && dist_from_center < OUTER_SPIN_RADIUS)
+            if (dist_from_center > INNER_SPIN_RADIUS * scaleY / 2.4f && dist_from_center < OUTER_SPIN_RADIUS * scaleY / 2.4f)
             {
                 if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Ended)
                 {

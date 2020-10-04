@@ -16,6 +16,7 @@ public class BasketballManager : MiniGameManager
     [SerializeField] private GameObject basketball_position;
     [SerializeField] private GameObject basketball_prefab;
     [SerializeField] private GameObject basketball_net;
+    public GameObject ballholder2;
     private GameObject current_basketball;
     private Vector2 basketball_center;
     private float startTime;
@@ -97,6 +98,15 @@ public class BasketballManager : MiniGameManager
             return;
         }
 
+        // Go behind the net
+        if (current_basketball.transform.position.y > basketball_net.transform.position.y + current_basketball.transform.GetComponent<CircleCollider2D>().radius)
+        {
+            current_basketball.transform.parent = ballholder2.transform;
+        }
+
+        GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
+        var scaleY = canv.GetComponent<RectTransform>().localScale.y;
+
         var tapCount = Input.touchCount;
         for (var i = 0; i < tapCount; i++)
         {
@@ -104,7 +114,7 @@ public class BasketballManager : MiniGameManager
             var dist_from_center = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(basketball_center.x - touch.position.x), 2) + Mathf.Pow(Mathf.Abs(basketball_center.y - touch.position.y), 2));
 
             // Start swipe
-            if (dist_from_center > 0 && dist_from_center < SWIPE_RADIUS)
+            if (dist_from_center > 0 && dist_from_center < SWIPE_RADIUS * scaleY / 2.4f)
             {
                 
                 if (ballReadyToShoot && (touch.phase == TouchPhase.Began || fingerId == -1))
