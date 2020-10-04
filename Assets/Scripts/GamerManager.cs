@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public abstract class MiniGameManager :  MonoBehaviour
 {
@@ -42,6 +43,8 @@ public abstract class MiniGameManager :  MonoBehaviour
 [RequireComponent(typeof(HealthManager))]
 public class GamerManager : MonoBehaviour
 {
+    private int m_score;
+
     // Constants
     private readonly float DIFFICULTY_SCALE_SPEED = 0.01f; // arbitrary units per second
 
@@ -65,6 +68,7 @@ public class GamerManager : MonoBehaviour
 
     public GameObject GameCanvas;
     public GameObject PauseCanvas;
+    public GameObject DeathCanvas;
 
     public GameObject NotificationSystemObject;
 
@@ -88,19 +92,36 @@ public class GamerManager : MonoBehaviour
 
     private const float LEAVE_SPINNER_TIMER_INTERVAL = 5f;
 
+    private float gameStartTime;
+
+    public GameObject ScoreObj;
+
+    private Text ScoreText;
+
+    public GameObject DeathScoreObj;
+
+    private Text DeathScoreText;
+
     // TODO when you start a spinner, it needs a short grace period where it doesnt penalize you for not spinning
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         NotificationSystem = NotificationSystemObject.GetComponent<NotificationSystem>();
         PauseCanvas.SetActive(false);
         GameCanvas.SetActive(true);
+        DeathCanvas.SetActive(false);
         m_healthManager = GetComponent<HealthManager>();
+        ScoreText = ScoreObj.GetComponent<Text>();
+        DeathScoreText = DeathScoreObj.GetComponent<Text>();
+    }
 
-        //StartMiniGame(0);
+    void Start()
+    {
         StartSpinner(0);
         StartMiniGame(1);
+        m_score = 0;
+        gameStartTime = Time.time;
     }
 
     // Left side is 0, right side is 1
@@ -162,7 +183,6 @@ public class GamerManager : MonoBehaviour
         NotificationSystem.Pause();
         PauseCanvas.SetActive(true);
         GameCanvas.SetActive(false);
-        
     }
 
     public void Unpause() {
@@ -212,7 +232,14 @@ public class GamerManager : MonoBehaviour
         if (m_paused)
             return;
 
-      
+        m_score = (int)(Time.time - gameStartTime);
+        ScoreText.text = $"{m_score}s";
+
+        if (m_healthManager.GetHP() < 0)
+        {
+            Die();
+        }
+
         m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
         var states = new List<HealthState>();
         // Check any spinners for health updates
@@ -307,5 +334,18 @@ public class GamerManager : MonoBehaviour
         }
 
         doubleSpinnerTimer -= 1 * Time.fixedDeltaTime;
+    }
+
+    private void Die()
+    {
+        m_paused = true;
+        DeathCanvas.SetActive(true);
+        GameCanvas.SetActive(false);
+        PauseCanvas.SetActive(false); // God i hope i dont need you
+        var topScoreManager = FindObjectOfType<TopScoreManager>();
+        var score = new Score() { name = "YOU", score = m_score };
+        topScoreManager.RegisterTopScore(score);
+        topScoreManager.SaveTopScores();
+        DeathScoreText.text = $"YOUR SCORE: {m_score}";
     }
 }

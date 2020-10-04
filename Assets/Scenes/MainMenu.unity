@@ -415,7 +415,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'HIGH SCORES
+
+'
 --- !u!222 &425072624
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -436,6 +438,7 @@ GameObject:
   - component: {fileID: 599386357}
   - component: {fileID: 599386356}
   - component: {fileID: 599386355}
+  - component: {fileID: 599386358}
   m_Layer: 5
   m_Name: HighScoresButton
   m_TagString: Untagged
@@ -505,7 +508,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 599386356}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 599386358}
+        m_MethodName: HighScores
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &599386356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +556,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599386353}
   m_CullTransparentMesh: 0
+--- !u!114 &599386358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599386353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7225224dd450b9042a1bd50c700641cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &631750229
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +888,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1231477536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231477538}
+  - component: {fileID: 1231477537}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1231477537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231477536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2fe66eed9f9894eaedc1a9ec8d376a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - clip: {fileID: 8300000, guid: 1884bb1903a65444298951c07f56372c, type: 3}
+    volume: 0.5
+    pitch: 1
+    name: FinishedMinigame
+    playOnAwake: 0
+    loop: 0
+    muteProfile: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 70fa7ada3c43cd84185333aa34964264, type: 3}
+    volume: 0.253
+    pitch: 1
+    name: BGM
+    playOnAwake: 1
+    loop: 1
+    muteProfile: 1
+    source: {fileID: 0}
+  SfxMuted: 0
+  MusicMuted: 0
+--- !u!4 &1231477538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231477536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 645.7399, y: 412.23526, z: -59.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1557656479
 GameObject:
