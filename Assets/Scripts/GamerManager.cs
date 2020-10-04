@@ -63,9 +63,39 @@ public class GamerManager : MonoBehaviour
 
     private bool m_paused = false;
 
+    public GameObject GameCanvas;
+    public GameObject PauseCanvas;
+
+    public GameObject NotificationSystemObject;
+
+    private NotificationSystem NotificationSystem;
+
+    private bool waitingForNewGame = false;
+
+    private float startNewGameTimer = -1f;
+
+    private const float START_NEW_GAME_TIMER_INTERVAL = 1f;
+
+    private int newGameSide;
+
+    private const float DOUBLE_SPINNER_TIMER_INTERVAL = 10f;
+
+    private float doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
+
+    private bool doingDoubleSpinner;
+
+    private float leaveSpinnerTimer;
+
+    private const float LEAVE_SPINNER_TIMER_INTERVAL = 5f;
+
+    // TODO when you start a spinner, it needs a short grace period where it doesnt penalize you for not spinning
+
     // Start is called before the first frame update
     void Start()
     {
+        NotificationSystem = NotificationSystemObject.GetComponent<NotificationSystem>();
+        PauseCanvas.SetActive(false);
+        GameCanvas.SetActive(true);
         m_healthManager = GetComponent<HealthManager>();
 
         //StartMiniGame(0);
@@ -76,6 +106,8 @@ public class GamerManager : MonoBehaviour
     // Left side is 0, right side is 1
     void StartMiniGame(int side, GameObject gameOverride = null)
     {
+        NotificationSystem.Alert(side, AlertLevel.Low);
+
         if (side < 0 || side > 1)
         {
             Debug.Log("No");
@@ -105,14 +137,18 @@ public class GamerManager : MonoBehaviour
 
     void FinishMiniGame(int side, int reward)
     {
+        FindObjectOfType<SoundManager>().Play("FinishedMinigame");
+
         // End old game stuff
         m_healthManager.AddHP(reward);
+        m_currentGameIndex[side] = -1;
         m_currentGameManager[side].DoneGame -= FinishMiniGame;
         m_currentGameManager[side].DestroySelf();
 
-        // Start new
-        // Spinner flow goes here
-        StartMiniGame(side);
+        // Set timer to start new minigame, or do spinner switching stuff here
+        waitingForNewGame = true;
+        startNewGameTimer = START_NEW_GAME_TIMER_INTERVAL;
+        newGameSide = side;
     }
 
     public void Pause() {
@@ -122,6 +158,11 @@ public class GamerManager : MonoBehaviour
         {
             gameManager.Pause();
         }
+
+        NotificationSystem.Pause();
+        PauseCanvas.SetActive(true);
+        GameCanvas.SetActive(false);
+        
     }
 
     public void Unpause() {
@@ -131,6 +172,10 @@ public class GamerManager : MonoBehaviour
         {
             gameManager.Unpause();
         }
+
+        NotificationSystem.Unpause();
+        PauseCanvas.SetActive(false);
+        GameCanvas.SetActive(true);
     }
 
     private int PickNewGameIndex(int side)
@@ -171,12 +216,34 @@ public class GamerManager : MonoBehaviour
         m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
         var states = new List<HealthState>();
         // Check any spinners for health updates
-        foreach(var game in m_currentGame)
+        for(var i = 0; i < m_currentGame.Count; i++)
         {
+            var game = m_currentGame[i];
+            if (game == null)
+            {
+                continue;
+            }
+
             var spinManager = game.GetComponent<SpinManager>();
             if (spinManager == null)
             {
                 continue;
+            }
+
+            switch(spinManager.SpinState)
+            {
+                case SpinState.ReallyFine:
+                    NotificationSystem.CancelAlert(i, AlertLevel.High);
+                    break;
+                case SpinState.Fine:
+                    NotificationSystem.CancelAlert(i, AlertLevel.High);
+                    break;
+                case SpinState.Bad:
+                    NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                    break;
+                case SpinState.ReallyBad:
+                    NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                    break;
             }
 
             states.Add(spinManager.GetHealthState());
@@ -184,8 +251,9 @@ public class GamerManager : MonoBehaviour
 
         // Assuming we want the worst performance of all current spinners to be what affects our hp
         var worstState = HealthState.Fine;
-        foreach(var state in states)
+        for (var i = 0; i < states.Count; i++)
         {
+            var state = states[i];
             switch(worstState)
             {
                 case HealthState.Fine:
@@ -206,5 +274,38 @@ public class GamerManager : MonoBehaviour
         }
 
         m_healthManager.SetHealthState(worstState);
+
+        if (waitingForNewGame)
+        {
+            startNewGameTimer -= 1 * Time.fixedDeltaTime;
+            if (startNewGameTimer < 0f)
+            {
+                waitingForNewGame = false;
+                if (doubleSpinnerTimer < 0f)
+                {
+                    StartSpinner(newGameSide);
+                    leaveSpinnerTimer = LEAVE_SPINNER_TIMER_INTERVAL;
+                    doingDoubleSpinner = true;
+                    newGameSide = (newGameSide + 1) % 2;
+                }
+                else
+                {
+                    StartMiniGame(newGameSide);
+                }
+            }
+        }
+
+        if (doingDoubleSpinner)
+        {
+            leaveSpinnerTimer -= 1 * Time.fixedDeltaTime;
+            if (leaveSpinnerTimer < 0f)
+            {
+                doingDoubleSpinner = false;
+                doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
+                FinishMiniGame(newGameSide, 0);
+            }
+        }
+
+        doubleSpinnerTimer -= 1 * Time.fixedDeltaTime;
     }
 }
