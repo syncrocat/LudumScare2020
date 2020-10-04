@@ -344,7 +344,7 @@ public class GamerManager : MonoBehaviour
                 {
                     doingDoubleSpinner = false;
                     doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
-                    FinishMiniGame(newGameSide, 0);
+                    FinishMiniGame(newGameSide, 50);
                 }
             }
 
