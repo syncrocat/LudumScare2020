@@ -10,9 +10,21 @@ public class SoundManager : MonoBehaviour
 
     public bool MusicMuted = false;
 
+    private static SoundManager instance;
+
     private void Awake()
     {
-        foreach(var sound in Sounds)
+        DontDestroyOnLoad(this.gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Object.Destroy(gameObject);
+        }
+
+        foreach (var sound in Sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.clip;
