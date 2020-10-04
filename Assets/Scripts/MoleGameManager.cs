@@ -56,7 +56,7 @@ public class MoleGameManager : MiniGameManager
             return;
         }
 
-        /*if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0)) {
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
             if (!(hit && hit.collider != null && hit.collider.gameObject != null))
             {
@@ -69,10 +69,10 @@ public class MoleGameManager : MiniGameManager
             }
 
             TapMole(moleHit);
-        }*/
+        }
 
         // Check for touches on any moles
-        foreach(Touch touch in Input.touches)
+        /*foreach(Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
             {
@@ -90,7 +90,7 @@ public class MoleGameManager : MiniGameManager
 
                 TapMole(moleHit);
             }
-        }
+        }*/
     }
 
     private void TapMole(Mole tappedMole)

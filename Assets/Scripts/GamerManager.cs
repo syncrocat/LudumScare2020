@@ -70,6 +70,26 @@ public class GamerManager : MonoBehaviour
 
     private NotificationSystem NotificationSystem;
 
+    private bool waitingForNewGame = false;
+
+    private float startNewGameTimer = -1f;
+
+    private const float START_NEW_GAME_TIMER_INTERVAL = 1f;
+
+    private int newGameSide;
+
+    private const float DOUBLE_SPINNER_TIMER_INTERVAL = 10f;
+
+    private float doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
+
+    private bool doingDoubleSpinner;
+
+    private float leaveSpinnerTimer;
+
+    private const float LEAVE_SPINNER_TIMER_INTERVAL = 5f;
+
+    // TODO when you start a spinner, it needs a short grace period where it doesnt penalize you for not spinning
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,12 +139,14 @@ public class GamerManager : MonoBehaviour
     {
         // End old game stuff
         m_healthManager.AddHP(reward);
+        m_currentGameIndex[side] = -1;
         m_currentGameManager[side].DoneGame -= FinishMiniGame;
         m_currentGameManager[side].DestroySelf();
 
-        // Start new
-        // Spinner flow goes here
-        StartMiniGame(side);
+        // Set timer to start new minigame, or do spinner switching stuff here
+        waitingForNewGame = true;
+        startNewGameTimer = START_NEW_GAME_TIMER_INTERVAL;
+        newGameSide = side;
     }
 
     public void Pause() {
@@ -194,6 +216,11 @@ public class GamerManager : MonoBehaviour
         for(var i = 0; i < m_currentGame.Count; i++)
         {
             var game = m_currentGame[i];
+            if (game == null)
+            {
+                continue;
+            }
+
             var spinManager = game.GetComponent<SpinManager>();
             if (spinManager == null)
             {
@@ -244,5 +271,38 @@ public class GamerManager : MonoBehaviour
         }
 
         m_healthManager.SetHealthState(worstState);
+
+        if (waitingForNewGame)
+        {
+            startNewGameTimer -= 1 * Time.fixedDeltaTime;
+            if (startNewGameTimer < 0f)
+            {
+                waitingForNewGame = false;
+                if (doubleSpinnerTimer < 0f)
+                {
+                    StartSpinner(newGameSide);
+                    leaveSpinnerTimer = LEAVE_SPINNER_TIMER_INTERVAL;
+                    doingDoubleSpinner = true;
+                    newGameSide = (newGameSide + 1) % 2;
+                }
+                else
+                {
+                    StartMiniGame(newGameSide);
+                }
+            }
+        }
+
+        if (doingDoubleSpinner)
+        {
+            leaveSpinnerTimer -= 1 * Time.fixedDeltaTime;
+            if (leaveSpinnerTimer < 0f)
+            {
+                doingDoubleSpinner = false;
+                doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
+                FinishMiniGame(newGameSide, 0);
+            }
+        }
+
+        doubleSpinnerTimer -= 1 * Time.fixedDeltaTime;
     }
 }
