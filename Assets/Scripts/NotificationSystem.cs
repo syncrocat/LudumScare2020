@@ -23,7 +23,7 @@ public class NotificationSystem : MonoBehaviour
     private float m_leftHighTimer = 0;
     private float m_rightHighTimer = 0;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ObjectMapping = new Dictionary<Tuple<int, AlertLevel>, Notification>()
         {
@@ -51,7 +51,9 @@ public class NotificationSystem : MonoBehaviour
     public void Alert(int side, AlertLevel alertLevel)
     {
         // 3 flashes of 0.5s with 0.5s between them
-        ObjectMapping[new Tuple<int, AlertLevel>(side, alertLevel)].Begin();
+        var x = ObjectMapping[new Tuple<int, AlertLevel>(side, alertLevel)];
+        if (x != null)
+            x.Begin();
     }
 
     public void IndefiniteAlert(int side, AlertLevel alertLevel)
