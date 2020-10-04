@@ -11,7 +11,7 @@ public class Notification : MonoBehaviour
 
     private bool m_paused = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_image = GetComponent<Image>();
     }
