@@ -102,6 +102,8 @@ public class GamerManager : MonoBehaviour
 
     private Text DeathScoreText;
 
+    private bool tutorialOver;
+
     // TODO when you start a spinner, it needs a short grace period where it doesnt penalize you for not spinning
 
     // Start is called before the first frame update
@@ -118,10 +120,10 @@ public class GamerManager : MonoBehaviour
 
     void Start()
     {
+        tutorialOver = false;
+        m_healthManager.Pause();
         StartSpinner(0);
-        StartMiniGame(1);
         m_score = 0;
-        gameStartTime = Time.time;
     }
 
     // Left side is 0, right side is 1
@@ -232,108 +234,123 @@ public class GamerManager : MonoBehaviour
         if (m_paused)
             return;
 
-        m_score = (int)(Time.time - gameStartTime);
-        ScoreText.text = $"{m_score}s";
-
-        if (m_healthManager.GetHP() < 0)
+        if (!tutorialOver)
         {
-            Die();
-        }
-
-        m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
-        var states = new List<HealthState>();
-        // Check any spinners for health updates
-        for(var i = 0; i < m_currentGame.Count; i++)
-        {
-            var game = m_currentGame[i];
-            if (game == null)
+            var spinManager = m_currentGame[0].GetComponent<SpinManager>();
+            if (spinManager.VelocityManager.GetCurrentVelocity() > 70f)
             {
-                continue;
-            }
-
-            var spinManager = game.GetComponent<SpinManager>();
-            if (spinManager == null)
-            {
-                continue;
-            }
-
-            switch(spinManager.SpinState)
-            {
-                case SpinState.ReallyFine:
-                    NotificationSystem.CancelAlert(i, AlertLevel.High);
-                    break;
-                case SpinState.Fine:
-                    NotificationSystem.CancelAlert(i, AlertLevel.High);
-                    break;
-                case SpinState.Bad:
-                    NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
-                    break;
-                case SpinState.ReallyBad:
-                    NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
-                    break;
-            }
-
-            states.Add(spinManager.GetHealthState());
-        }
-
-        // Assuming we want the worst performance of all current spinners to be what affects our hp
-        var worstState = HealthState.Fine;
-        for (var i = 0; i < states.Count; i++)
-        {
-            var state = states[i];
-            switch(worstState)
-            {
-                case HealthState.Fine:
-                    if (state == HealthState.NotFine || state == HealthState.Empty)
-                    {
-                        worstState = state;
-                    }
-                    break;
-                case HealthState.NotFine:
-                    if (state == HealthState.Empty)
-                    {
-                        worstState = state;
-                    }
-                    break;
-                case HealthState.Empty:
-                    break;
+                tutorialOver = true;
+                m_healthManager.Unpause();
+                gameStartTime = Time.time;
+                StartMiniGame(1);
             }
         }
 
-        m_healthManager.SetHealthState(worstState);
-
-        if (waitingForNewGame)
+        if (tutorialOver)
         {
-            startNewGameTimer -= 1 * Time.fixedDeltaTime;
-            if (startNewGameTimer < 0f)
+            m_score = (int)(Time.time - gameStartTime);
+            ScoreText.text = $"{m_score}s";
+
+            if (m_healthManager.GetHP() < 0)
             {
-                waitingForNewGame = false;
-                if (doubleSpinnerTimer < 0f)
+                Die();
+            }
+
+            m_difficultyModifier += DIFFICULTY_SCALE_SPEED * Time.deltaTime;
+            var states = new List<HealthState>();
+            // Check any spinners for health updates
+            for (var i = 0; i < m_currentGame.Count; i++)
+            {
+                var game = m_currentGame[i];
+                if (game == null)
                 {
-                    StartSpinner(newGameSide);
-                    leaveSpinnerTimer = LEAVE_SPINNER_TIMER_INTERVAL;
-                    doingDoubleSpinner = true;
-                    newGameSide = (newGameSide + 1) % 2;
+                    continue;
                 }
-                else
+
+                var spinManager = game.GetComponent<SpinManager>();
+                if (spinManager == null)
                 {
-                    StartMiniGame(newGameSide);
+                    continue;
+                }
+
+                switch (spinManager.SpinState)
+                {
+                    case SpinState.ReallyFine:
+                        NotificationSystem.CancelAlert(i, AlertLevel.High);
+                        break;
+                    case SpinState.Fine:
+                        NotificationSystem.CancelAlert(i, AlertLevel.High);
+                        break;
+                    case SpinState.Bad:
+                        NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                        break;
+                    case SpinState.ReallyBad:
+                        NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
+                        break;
+                }
+
+                states.Add(spinManager.GetHealthState());
+            }
+
+            // Assuming we want the worst performance of all current spinners to be what affects our hp
+            var worstState = HealthState.Fine;
+            for (var i = 0; i < states.Count; i++)
+            {
+                var state = states[i];
+                switch (worstState)
+                {
+                    case HealthState.Fine:
+                        if (state == HealthState.NotFine || state == HealthState.Empty)
+                        {
+                            worstState = state;
+                        }
+                        break;
+                    case HealthState.NotFine:
+                        if (state == HealthState.Empty)
+                        {
+                            worstState = state;
+                        }
+                        break;
+                    case HealthState.Empty:
+                        break;
                 }
             }
-        }
 
-        if (doingDoubleSpinner)
-        {
-            leaveSpinnerTimer -= 1 * Time.fixedDeltaTime;
-            if (leaveSpinnerTimer < 0f)
+            m_healthManager.SetHealthState(worstState);
+
+            if (waitingForNewGame)
             {
-                doingDoubleSpinner = false;
-                doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
-                FinishMiniGame(newGameSide, 50);
+                startNewGameTimer -= 1 * Time.fixedDeltaTime;
+                if (startNewGameTimer < 0f)
+                {
+                    waitingForNewGame = false;
+                    if (doubleSpinnerTimer < 0f)
+                    {
+                        StartSpinner(newGameSide);
+                        leaveSpinnerTimer = LEAVE_SPINNER_TIMER_INTERVAL;
+                        doingDoubleSpinner = true;
+                        newGameSide = (newGameSide + 1) % 2;
+                    }
+                    else
+                    {
+                        StartMiniGame(newGameSide);
+                    }
+                }
             }
-        }
 
-        doubleSpinnerTimer -= 1 * Time.fixedDeltaTime;
+            if (doingDoubleSpinner)
+            {
+                leaveSpinnerTimer -= 1 * Time.fixedDeltaTime;
+                if (leaveSpinnerTimer < 0f)
+                {
+                    doingDoubleSpinner = false;
+                    doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
+                    FinishMiniGame(newGameSide, 50);
+                }
+            }
+
+            doubleSpinnerTimer -= 1 * Time.fixedDeltaTime;
+        }
     }
 
     private void Die()
