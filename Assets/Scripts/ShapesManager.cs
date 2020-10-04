@@ -50,7 +50,7 @@ public class ShapesManager : MiniGameManager
         base.StartGame(side, difficulty, gameArea);
 
         float baseIdiotNumber = Mathf.Floor(Mathf.Min(timesSeen / 2 + 3, 8));
-        
+        baseIdiotNumber = 20;
 
         timesSeen += 1;
 

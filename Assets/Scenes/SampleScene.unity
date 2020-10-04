@@ -981,6 +981,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1652868030, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652868030, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652868030, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2081251065, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
       propertyPath: GamerManager
       value: 
@@ -1103,7 +1115,7 @@ PrefabInstance:
     - target: {fileID: 2999698891951403751, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 170
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 2999698891951403751, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
@@ -1123,7 +1135,7 @@ PrefabInstance:
     - target: {fileID: 3293918042316917903, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -40.6
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 3293918042316917903, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
@@ -1138,12 +1150,12 @@ PrefabInstance:
     - target: {fileID: 4024074087788812504, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -40.59999
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 8181904216885746274, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 170
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 8181904216885746274, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
@@ -1225,7 +1237,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_games.Array.data[1]
       value: 
-      objectReference: {fileID: 8430249475823549049, guid: a40eb88b6be313d409b99ff43f71e24d,
+      objectReference: {fileID: 8399320832294549562, guid: c58f02a455961994ba0150acc5ffeb33,
         type: 3}
     - target: {fileID: 5496182968407174953, guid: 4943b887af3919840995d1966610726a,
         type: 3}
@@ -1252,7 +1264,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_games.Array.data[3]
       value: 
-      objectReference: {fileID: 8399320832294549562, guid: c58f02a455961994ba0150acc5ffeb33,
+      objectReference: {fileID: 8430249475823549049, guid: a40eb88b6be313d409b99ff43f71e24d,
         type: 3}
     - target: {fileID: 9118873634382429008, guid: 4943b887af3919840995d1966610726a,
         type: 3}
