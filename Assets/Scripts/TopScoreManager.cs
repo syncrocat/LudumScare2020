@@ -79,8 +79,8 @@ public class TopScoreManager : MonoBehaviour
     {
         for (var i = 0; i < TopScores.Count; i++)
         {
-            PlayerPrefs.SetString($"TopScoreName{i}", TopScores[i].name);
-            PlayerPrefs.SetInt($"TopScore{i}", TopScores[i].score);
+            PlayerPrefs.SetString($"TopScoreNamex{i}", TopScores[i].name);
+            PlayerPrefs.SetInt($"TopScorex{i}", TopScores[i].score);
         }
     }
 }
