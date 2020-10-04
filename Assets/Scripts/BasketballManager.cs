@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BasketballManager : MiniGameManager
 {
@@ -25,7 +26,7 @@ public class BasketballManager : MiniGameManager
     private float swipeDuration;
     private bool ballReadyToShoot;
 
-    int movespeed = 100;
+    int movespeed = 0;
     public GameObject m_movingComponent;
 
     // Start is called before the first frame update
@@ -71,9 +72,12 @@ public class BasketballManager : MiniGameManager
 
         Vector3 newPosition = m_movingComponent.transform.position + new Vector3(movespeed * direction * Time.fixedDeltaTime, 0, 0);
 
-        if  (newPosition.x > m_gameArea.transform.position.x + 500 || newPosition.x < m_gameArea.transform.position.x - 500) {
+        GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
+        var scaleY = canv.GetComponent<RectTransform>().localScale.y;
+
+        if  ((newPosition.x > m_gameArea.transform.position.x + 300 * scaleY / 2.4f && direction == 1) || (newPosition.x < m_gameArea.transform.position.x - 300 * scaleY / 2.4f && direction == -1)) {
             direction *= -1;
-            newPosition += new Vector3(Mathf.Abs(m_gameArea.transform.position.x - newPosition.x) * direction * 2, 0, 0);
+           // newPosition += new Vector3(Mathf.Abs(m_gameArea.transform.position.x - newPosition.x) * direction * 2, 0, 0);
         }
 
         m_movingComponent.transform.position = newPosition;
