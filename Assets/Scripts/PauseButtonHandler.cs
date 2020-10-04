@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseButtonHandler : MonoBehaviour
 {
@@ -12,6 +13,14 @@ public class PauseButtonHandler : MonoBehaviour
     public GameObject MusicMuteButton;
 
     private SoundManager SoundManager;
+
+    public Image MusicImage;
+
+    public Image SfxImage;
+    public Sprite NotMutedMusicIcon;
+    public Sprite NotMutedSfxIcon;
+    public Sprite MutedMusicIcon;
+    public Sprite MutedSfxIcon;
 
     public void Start()
     {
@@ -37,9 +46,11 @@ public class PauseButtonHandler : MonoBehaviour
     {
         if (SoundManager.SfxMuted)
         {
+            SfxImage.sprite = NotMutedSfxIcon;
             SoundManager.Unmute(MuteProfile.SFX);
         } else
         {
+            SfxImage.sprite = MutedSfxIcon;
             SoundManager.Mute(MuteProfile.SFX);
         }
     }
@@ -48,9 +59,11 @@ public class PauseButtonHandler : MonoBehaviour
     {
         if (SoundManager.MusicMuted)
         {
+            MusicImage.sprite = NotMutedMusicIcon;
             SoundManager.Unmute(MuteProfile.Music);
         } else
         {
+            MusicImage.sprite = MutedMusicIcon;
             SoundManager.Mute(MuteProfile.Music);
         }
     }

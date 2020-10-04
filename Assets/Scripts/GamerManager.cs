@@ -184,7 +184,10 @@ public class GamerManager : MonoBehaviour
         m_healthManager.Pause();
         foreach(var gameManager in m_currentGameManager)
         {
-            gameManager.Pause();
+            if (gameManager != null)
+            {
+                gameManager.Pause();
+            }
         }
 
         NotificationSystem.Pause();
@@ -197,7 +200,10 @@ public class GamerManager : MonoBehaviour
         m_healthManager.Unpause();
         foreach(var gameManager in m_currentGameManager)
         {
-            gameManager.Unpause();
+            if (gameManager != null)
+            {
+                gameManager.Unpause();
+            }
         }
 
         NotificationSystem.Unpause();

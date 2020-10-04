@@ -461,12 +461,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7118719931801221308}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1301705145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1301705145, guid: 4f53d3e13f051124d82c3d57549e734b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2113426607089343947}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1347931839 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2113426607192416975, guid: 4f53d3e13f051124d82c3d57549e734b,
@@ -638,6 +632,12 @@ MonoBehaviour:
   GamerManager: {fileID: 1445035776}
   SfxMuteButton: {fileID: 0}
   MusicMuteButton: {fileID: 0}
+  MusicImage: {fileID: 0}
+  SfxImage: {fileID: 0}
+  NotMutedMusicIcon: {fileID: 0}
+  NotMutedSfxIcon: {fileID: 0}
+  MutedMusicIcon: {fileID: 0}
+  MutedSfxIcon: {fileID: 0}
 --- !u!1 &1652868028 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1652868028, guid: 4f53d3e13f051124d82c3d57549e734b,
@@ -946,6 +946,12 @@ MonoBehaviour:
   GamerManager: {fileID: 1445035776}
   SfxMuteButton: {fileID: 0}
   MusicMuteButton: {fileID: 0}
+  MusicImage: {fileID: 0}
+  SfxImage: {fileID: 0}
+  NotMutedMusicIcon: {fileID: 0}
+  NotMutedSfxIcon: {fileID: 0}
+  MutedMusicIcon: {fileID: 0}
+  MutedSfxIcon: {fileID: 0}
 --- !u!1001 &2113426607089343947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -953,10 +959,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 453556860, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
-      propertyPath: RightHigh
-      value: 
-      objectReference: {fileID: 1301705145}
     - target: {fileID: 2081251065, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
       propertyPath: GamerManager
       value: 
