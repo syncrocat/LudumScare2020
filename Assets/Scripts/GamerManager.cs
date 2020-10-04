@@ -268,7 +268,9 @@ public class GamerManager : MonoBehaviour
         if (tutorialOver)
         {
             m_score = (int)(Time.time - gameStartTime);
-            ScoreText.text = $"{m_score}s";
+            var minutes = (int)(m_score / 60);
+            var seconds = m_score % 60;
+            ScoreText.text = $"{minutes}:{seconds}";
 
             if (m_healthManager.GetHP() < 0)
             {
@@ -399,6 +401,9 @@ public class GamerManager : MonoBehaviour
         var score = new Score() { name = "YOU", score = m_score };
         topScoreManager.RegisterTopScore(score);
         topScoreManager.SaveTopScores();
-        DeathScoreText.text = $"YOUR SCORE: {m_score}";
+
+        var minutes = (int)(m_score / 60);
+        var seconds = m_score % 60;
+        DeathScoreText.text = $"YOUR SCORE: {minutes}:{seconds}";
     }
 }
