@@ -39,12 +39,11 @@ public class TopScoreManager : MonoBehaviour
             if (PlayerPrefs.HasKey($"TopScoreName{i}"))
             {
                 name = PlayerPrefs.GetString($"TopScoreName{i}");
-                //name = presetScoreNames[9 - i];
             }
             else
             {
                 //name = $"Player {i + 1}";
-                name = presetScoreNames[9 - i];
+                name = presetScoreNames[i];
             }
 
             int score;

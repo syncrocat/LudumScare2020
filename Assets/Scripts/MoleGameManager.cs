@@ -19,7 +19,7 @@ public class MoleGameManager : MiniGameManager
 
     private List<int> m_moleOrder;
 
-    static int timesSeen = 0;
+    public static int timesSeen = 0;
 
     protected override string GameName()
     {

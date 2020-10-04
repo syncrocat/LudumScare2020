@@ -29,7 +29,7 @@ public class CardManager : MiniGameManager
         return "MATCH THE CARDS";
     }
 
-    static int timesSeen = 0;
+    public static int timesSeen = 0;
 
     public override void StartGame(int side, float difficulty, GameObject gameArea)
     {

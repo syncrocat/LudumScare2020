@@ -139,6 +139,11 @@ public class GamerManager : MonoBehaviour
         m_healthManager.Pause();
         StartSpinner(0);
         m_score = 0;
+
+        CardManager.timesSeen = 0;
+        ShapesManager.timesSeen = 0;
+        BasketballManager.timesSeen = 0;
+        MoleGameManager.timesSeen = 0;
     }
 
     // Left side is 0, right side is 1
@@ -263,6 +268,8 @@ public class GamerManager : MonoBehaviour
         }
     }
 
+    int doggy = 1;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -348,29 +355,34 @@ public class GamerManager : MonoBehaviour
 
             // Assuming we want the worst performance of all current spinners to be what affects our hp
             var worstState = HealthState.Fine;
-            for (var i = 0; i < states.Count; i++)
-            {
-                var state = states[i];
-                switch (worstState)
-                {
-                    case HealthState.Fine:
-                        if (state == HealthState.NotFine || state == HealthState.Empty)
-                        {
-                            worstState = state;
-                        }
-                        break;
-                    case HealthState.NotFine:
-                        if (state == HealthState.Empty)
-                        {
-                            worstState = state;
-                        }
-                        break;
-                    case HealthState.Empty:
-                        break;
-                }
-            }
+            /* for (var i = 0; i < states.Count; i++)
+             {
+                 var state = states[i];
+                 switch (worstState)
+                 {
+                     case HealthState.Fine:
+                         if (state == HealthState.NotFine || state == HealthState.Empty)
+                         {
+                             worstState = state;
+                         }
+                         break;
+                     case HealthState.NotFine:
+                         if (state == HealthState.Empty)
+                         {
+                             worstState = state;
+                         }
+                         break;
+                     case HealthState.Empty:
+                         break;
+                 }
+             }*/
 
-            m_healthManager.SetHealthState(worstState);
+
+
+            var current = doggy == 1 ? 0 : 1;
+            var hello105 = states.Count == 1 ? 0 : current;
+
+            m_healthManager.SetHealthState(states[hello105]);
 
             if (waitingForNewGame)
             {
@@ -400,6 +412,7 @@ public class GamerManager : MonoBehaviour
                     doingDoubleSpinner = false;
                     doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
                     FinishMiniGame(newGameSide, 50);
+                    doggy = doggy * -1;
                 }
             }
 

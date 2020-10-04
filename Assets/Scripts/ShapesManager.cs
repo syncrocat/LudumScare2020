@@ -6,7 +6,7 @@ public class ShapesManager : MiniGameManager
     private readonly float SQUARE_STANDARD_DIST = 300;
     private readonly float RANDOM_VARIANCE = 50;
 
-    static int timesSeen = 0; 
+    public static int timesSeen = 0; 
 
     [SerializeField] private GameObject dot_prefab;
     [SerializeField] private GameObject line_prefab;
@@ -49,8 +49,10 @@ public class ShapesManager : MiniGameManager
     {
         base.StartGame(side, difficulty, gameArea);
 
+        this.transform.position += new Vector3(0,-20, 0);
+
         float baseIdiotNumber = Mathf.Floor(Mathf.Min(timesSeen / 2 + 3, 8));
-        baseIdiotNumber = 20;
+        //baseIdiotNumber = 20;
 
         timesSeen += 1;
 

@@ -43,7 +43,7 @@ public class BasketballManager : MiniGameManager
         return "SHOOT A BASKET";
     }
 
-    static int timesSeen = 0;
+    public static int timesSeen = 0;
     public override void StartGame(int side, float difficulty, GameObject playArea)
     {
         base.StartGame(side, difficulty, playArea);
