@@ -435,6 +435,68 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7041504654249843300}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1454524558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1454524560}
+  - component: {fileID: 1454524559}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1454524559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454524558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2fe66eed9f9894eaedc1a9ec8d376a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - clip: {fileID: 8300000, guid: 1884bb1903a65444298951c07f56372c, type: 3}
+    volume: 0.5
+    pitch: 1
+    name: FinishedMinigame
+    playOnAwake: 0
+    loop: 0
+    muteProfile: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 70fa7ada3c43cd84185333aa34964264, type: 3}
+    volume: 0.253
+    pitch: 1
+    name: BGM
+    playOnAwake: 1
+    loop: 1
+    muteProfile: 1
+    source: {fileID: 0}
+  SfxMuted: 0
+  MusicMuted: 0
+--- !u!4 &1454524560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454524558}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 645.7399, y: 412.23526, z: -59.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635370237
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamerManager: {fileID: 1445035776}
+  SfxMuteButton: {fileID: 0}
+  MusicMuteButton: {fileID: 0}
 --- !u!1 &1666963963
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +942,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamerManager: {fileID: 1445035776}
+  SfxMuteButton: {fileID: 0}
+  MusicMuteButton: {fileID: 0}
 --- !u!1001 &2113426607089343947
 PrefabInstance:
   m_ObjectHideFlags: 0

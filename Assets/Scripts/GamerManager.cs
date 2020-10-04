@@ -137,6 +137,8 @@ public class GamerManager : MonoBehaviour
 
     void FinishMiniGame(int side, int reward)
     {
+        FindObjectOfType<SoundManager>().Play("FinishedMinigame");
+
         // End old game stuff
         m_healthManager.AddHP(reward);
         m_currentGameIndex[side] = -1;
