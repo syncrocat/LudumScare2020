@@ -272,7 +272,7 @@ public class GamerManager : MonoBehaviour
         if (!tutorialOver)
         {
             var spinManager = m_currentGame[0].GetComponent<SpinManager>();
-            if (spinManager.VelocityManager.GetCurrentVelocity() > 70f)
+            if (spinManager.VelocityManager.GetCurrentVelocity() > 50f)
             {
                 tutorialOver = true;
                 m_healthManager.Unpause();
@@ -314,28 +314,28 @@ public class GamerManager : MonoBehaviour
                 switch (spinManager.SpinState)
                 {
                     case SpinState.ReallyFine:
-                        if (spinManager.VelocityManager.GetCurrentVelocity() > 70f)
+                        if (spinManager.VelocityManager.GetCurrentVelocity() > 50f)
                         {
                             NotificationSystem.CancelAlert(i, AlertLevel.High);
                         }
                         
                         break;
                     case SpinState.Fine:
-                        if (spinManager.VelocityManager.GetCurrentVelocity() > 70f)
+                        if (spinManager.VelocityManager.GetCurrentVelocity() > 50f)
                         {
                             NotificationSystem.CancelAlert(i, AlertLevel.High);
                         }
 
                         break;
                     case SpinState.Bad:
-                        if (spinManager.VelocityManager.GetCurrentVelocity() < 40f)
+                        if (spinManager.VelocityManager.GetCurrentVelocity() < 25f)
                         {
                             NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
                         }
 
                         break;
                     case SpinState.ReallyBad:
-                        if (spinManager.VelocityManager.GetCurrentVelocity() < 40f)
+                        if (spinManager.VelocityManager.GetCurrentVelocity() < 25f)
                         {
                             NotificationSystem.IndefiniteAlert(i, AlertLevel.High);
                         }

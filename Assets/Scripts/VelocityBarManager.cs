@@ -12,8 +12,12 @@ public enum HealthState
 public class VelocityBarManager : MonoBehaviour
 {
     private const float MAX_VELOCITY = 100f;
-    private const float BAR_VELOCITY = 70f;
+    private const float BAR_VELOCITY = 50f;
     [SerializeField] private float m_currentVelocity; // Serialized for debug purposes
+
+    public GameObject water;
+
+
     private SpinState m_spinState;
     private readonly Dictionary<SpinState, float> m_velocityMapping = new Dictionary<SpinState, float>()
     {
@@ -25,10 +29,14 @@ public class VelocityBarManager : MonoBehaviour
 
     public Text DebugText;
 
+    float scaleY;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        defaultWaterPosition = water.transform.position;
+        GameObject canv = GameObject.FindGameObjectsWithTag("MainCanvas")[0];
+        scaleY = canv.GetComponent<RectTransform>().localScale.y;
     }
 
     // Update is called once per frame
@@ -79,10 +87,18 @@ public class VelocityBarManager : MonoBehaviour
         m_spinState = spinState;
     }
 
+    Vector2 defaultWaterPosition;
+
     public void FixedUpdate()
     {
+
         AddVelocity(m_velocityMapping[m_spinState] * Time.fixedDeltaTime);
         Debug($"Velocity: {m_currentVelocity}%");
+
+        var offBar = 300 * scaleY / 2.4f * ((100 - GetCurrentVelocity()) / 100);
+
+        water.transform.position = new Vector3(water.transform.position.x,  defaultWaterPosition.y - offBar, 0);
+
     }
 
     public HealthState GetHealthState()
@@ -114,4 +130,7 @@ public class VelocityBarManager : MonoBehaviour
 
         DebugText.text = text;
     }
+
+
+
 }
