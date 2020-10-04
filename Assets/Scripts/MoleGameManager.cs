@@ -19,6 +19,8 @@ public class MoleGameManager : MiniGameManager
 
     private List<int> m_moleOrder;
 
+    static int timesSeen = 0;
+
     protected override string GameName()
     {
         return "WHACK THE MOLES";
@@ -27,7 +29,13 @@ public class MoleGameManager : MiniGameManager
     public override void StartGame(int side, float difficulty, GameObject playArea)
     {
         base.StartGame(side, difficulty, playArea);
-        m_molesToPreview = Math.Max(MAX_PREVIEW_MOLES - (int)(difficulty * 10), MIN_PREVIEW_MOLES);
+       // m_molesToPreview = Math.Max(MAX_PREVIEW_MOLES - (int)(difficulty * 10), MIN_PREVIEW_MOLES);
+
+
+        m_molesToPreview = Math.Max(MIN_PREVIEW_MOLES, MAX_PREVIEW_MOLES - timesSeen);
+
+        timesSeen += 1;
+
         m_moles = m_moleObjects.Select(obj =>
         {
 

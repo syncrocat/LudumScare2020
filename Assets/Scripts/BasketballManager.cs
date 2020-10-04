@@ -43,14 +43,26 @@ public class BasketballManager : MiniGameManager
         return "SHOOT A BASKET";
     }
 
+    static int timesSeen = 0;
     public override void StartGame(int side, float difficulty, GameObject playArea)
     {
         base.StartGame(side, difficulty, playArea);
-
-        if (difficulty > 20)
+        
+        if (timesSeen < 5)
         {
-            movespeed = 20;
+            movespeed = 0;
+        } else if (timesSeen < 10)
+        {
+            movespeed = 100;
+        } else if (timesSeen < 15)
+        {
+            movespeed = 250;
+        } else
+        {
+            movespeed = 500;
         }
+
+        timesSeen += 1;
 
     }
 

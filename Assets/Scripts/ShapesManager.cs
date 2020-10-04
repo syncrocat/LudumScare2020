@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ShapesManager : MiniGameManager
 {
     private readonly float SQUARE_STANDARD_DIST = 300;
     private readonly float RANDOM_VARIANCE = 50;
+
+    static int timesSeen = 0; 
 
     [SerializeField] private GameObject dot_prefab;
     [SerializeField] private GameObject line_prefab;
@@ -48,9 +49,12 @@ public class ShapesManager : MiniGameManager
     {
         base.StartGame(side, difficulty, gameArea);
 
-        var baseIdiotNumber = 7;
+        float baseIdiotNumber = Mathf.Floor(Mathf.Min(timesSeen / 2 + 3, 8));
+        
 
-        var degreesPerDoge = 365 / baseIdiotNumber;
+        timesSeen += 1;
+
+        float degreesPerDoge = 365 / baseIdiotNumber;
 
         float tickingRotate = - degreesPerDoge / 2;
 

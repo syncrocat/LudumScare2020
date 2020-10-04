@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class MiniGameManager :  MonoBehaviour
 {
+    
     protected int m_side;
     protected float m_timer = 0;
     protected bool m_paused = false;
@@ -90,7 +91,7 @@ public class GamerManager : MonoBehaviour
 
     private int newGameSide;
 
-    private const float DOUBLE_SPINNER_TIMER_INTERVAL = 10f;
+    private const float DOUBLE_SPINNER_TIMER_INTERVAL = 30f;
 
     private float doubleSpinnerTimer = DOUBLE_SPINNER_TIMER_INTERVAL;
 

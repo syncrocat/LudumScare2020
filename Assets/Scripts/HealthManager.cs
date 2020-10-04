@@ -51,7 +51,7 @@ public class HealthManager : MonoBehaviour
         // After 200 seconds we'd like the drain rate to be as it stands now
         // At the beginning there should be maybe 1/10th the drain rate
         // So take the max of multiplier/2 and 1/10th?
-        var difficultyMod = Mathf.Max(1/10, CurrentDifficultyMultiplier / 2);
+        var difficultyMod = Mathf.Max(2/10, CurrentDifficultyMultiplier) == 2/10 ? 1/10 : CurrentDifficultyMultiplier;
         m_health -= m_drainRate * tt * difficultyMod;
 
         //m_healthbarMask.rect.height = m_healthbarMaskHeight * m_health / 100;

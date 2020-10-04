@@ -29,6 +29,8 @@ public class CardManager : MiniGameManager
         return "MATCH THE CARDS";
     }
 
+    static int timesSeen = 0;
+
     public override void StartGame(int side, float difficulty, GameObject gameArea)
     {
         base.StartGame(side, difficulty, gameArea);
@@ -36,18 +38,20 @@ public class CardManager : MiniGameManager
         // todo scale this with difficulty
         numCards = 8;
 
-        if (difficulty < 10)
+        if (timesSeen < 3)
         {
-            //numCards = 4;
+            numCards = 4;
         }
-        else if (difficulty < 20)
+        else if (timesSeen < 7)
         {
-            //numCards = 6;
+            numCards = 6;
         }
         else
-        { 
-           // numCards = 8;
+        {
+            numCards = 8;
         }
+
+        timesSeen += 1;
 
         for (int i = numCards; i < cards.Count; i++)
         {
