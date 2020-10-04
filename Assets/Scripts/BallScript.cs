@@ -37,6 +37,7 @@ public class BallScript : MonoBehaviour
 
     public void ShootMe(float shootHeight, Vector2 shootVector)
     {
+        FindObjectOfType<SoundManager>().Play("Throw");
         var shootHComponent = shootVector.y;
         var factor = shootHeight / shootHComponent;
         Vector2 newVector = shootVector * factor;
@@ -50,7 +51,6 @@ public class BallScript : MonoBehaviour
         rigidBody.velocity += newVector * (1.8f / 2.4f * scaleY);
         rigidBody.gravityScale = 300 / 2.4f * scaleY;
         timer = 0;
-
     }
 
     // Update is called once per frame
