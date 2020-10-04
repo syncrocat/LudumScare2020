@@ -24,14 +24,9 @@ public class CardManager : MiniGameManager
 
     private float timer = 0;
 
-    public void Start()
-    {
-        StartGame(0, 1, null);
-    }
-
     public override void StartGame(int side, float difficulty, GameObject gameArea)
     {
-        //base.StartGame(side, difficulty, gameArea);
+        base.StartGame(side, difficulty, gameArea);
 
         // todo scale this with difficulty
         numCards = 8;
