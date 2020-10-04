@@ -18,16 +18,33 @@ public class TopScoreManager : MonoBehaviour
 
     private void Start()
     {
+        string[] presetScoreNames =
+        {
+            "ludumdoggy",
+            "ludumdoggy",
+            "JacketKeeper",
+            "2edgy2handle",
+            "Peppy",
+            "ludumdoggy",
+            "Peppy",
+            "ludumdoggy",
+            "THE_LEGEND",
+            "DOGLIKE"
+        };
+
+
         for (var i = 0; i < 10; i++)
         {
             string name;
             if (PlayerPrefs.HasKey($"TopScoreName{i}"))
             {
                 name = PlayerPrefs.GetString($"TopScoreName{i}");
+                //name = presetScoreNames[9 - i];
             }
             else
             {
-                name = $"Player {i + 1}";
+                //name = $"Player {i + 1}";
+                name = presetScoreNames[9 - i];
             }
 
             int score;
