@@ -141,7 +141,7 @@ public class CardManager : MiniGameManager
                 // After this just  joiny doggy I guess
                 if (moleHit.killing == false && moleHit != previousUp)
                 {
-                    moleHit.FlipCard();
+                    
 
                     // Hot face them all down if some were in the hiding animation
                     for (int i = 0; i < numCards; i++)
@@ -154,6 +154,8 @@ public class CardManager : MiniGameManager
                             thing.internalTimer = 0;
                         }
                     }
+
+                    moleHit.FlipCard();
 
                     // If theres one thats already up to check against
                     if (previousUp != null)
