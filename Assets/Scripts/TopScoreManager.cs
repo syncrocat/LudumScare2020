@@ -36,9 +36,9 @@ public class TopScoreManager : MonoBehaviour
         for (var i = 0; i < 10; i++)
         {
             string name;
-            if (PlayerPrefs.HasKey($"TopScoreName{i}"))
+            if (PlayerPrefs.HasKey($"TopScoreNamex{i}"))
             {
-                name = PlayerPrefs.GetString($"TopScoreName{i}");
+                name = PlayerPrefs.GetString($"TopScoreNamex{i}");
             }
             else
             {
@@ -47,9 +47,9 @@ public class TopScoreManager : MonoBehaviour
             }
 
             int score;
-            if (PlayerPrefs.HasKey($"TopScore{i}"))
+            if (PlayerPrefs.HasKey($"TopScorex{i}"))
             {
-                score = PlayerPrefs.GetInt($"TopScore{i}");
+                score = PlayerPrefs.GetInt($"TopScorex{i}");
             }
             else
             {
