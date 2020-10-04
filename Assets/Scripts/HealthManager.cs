@@ -20,7 +20,7 @@ public class HealthManager : MonoBehaviour
     private bool m_paused;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_paused = false;
         m_health = MAX_HEALTH;

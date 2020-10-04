@@ -242,6 +242,7 @@ public class GamerManager : MonoBehaviour
                 tutorialOver = true;
                 m_healthManager.Unpause();
                 gameStartTime = Time.time;
+                StartMiniGame(1);
             }
         }
 
