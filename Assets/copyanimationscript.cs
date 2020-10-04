@@ -11,6 +11,8 @@ public class copyanimationscript : MonoBehaviour
     public SpriteRenderer copy_light;
     public VelocityBarManager VBM;
 
+    public bool lightOn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +27,15 @@ public class copyanimationscript : MonoBehaviour
             paste.sprite = copy_dark.sprite;
         } else
         {
-            paste.sprite = copy_dark.sprite;
-            //paste.sprite = copy_light.sprite;
+            if (lightOn)
+            {
+                paste.sprite = copy_light.sprite;
+            } else
+            {
+                paste.sprite = copy_dark.sprite;
+            }
+           
+            //
         }
         
     }
