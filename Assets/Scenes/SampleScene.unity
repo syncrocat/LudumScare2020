@@ -461,6 +461,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7118719931801221308}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1211388202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3603737904273786273, guid: 4f53d3e13f051124d82c3d57549e734b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2113426607089343947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1347931839 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2113426607192416975, guid: 4f53d3e13f051124d82c3d57549e734b,
@@ -959,10 +965,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1652868029, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 120
-      objectReference: {fileID: 0}
+    - target: {fileID: 453556860, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
+      propertyPath: LeftHigh
+      value: 
+      objectReference: {fileID: 1211388202}
     - target: {fileID: 2081251065, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
       propertyPath: GamerManager
       value: 
@@ -1077,10 +1083,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6094021148910518741, guid: 4f53d3e13f051124d82c3d57549e734b,
+    - target: {fileID: 3603737904273786273, guid: 4f53d3e13f051124d82c3d57549e734b,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -30
+      propertyPath: m_Name
+      value: LeftHigh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f53d3e13f051124d82c3d57549e734b, type: 3}
